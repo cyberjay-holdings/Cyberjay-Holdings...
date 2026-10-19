@@ -109,7 +109,7 @@ textarea{width:100%;min-height:220px;padding:1rem;border-radius:18px;border:1px 
 <header class="hdr"><a class="logo" href="#/">CYBER<span>JAY</span></a><nav class="menu" id="menu"><a href="#/" data-r="home">Businesses</a><a href="#/about" data-r="about">About</a><a href="#/chamber" data-r="chamber">Admin login</a></nav><button class="ib" id="st" aria-label="Appearance settings" aria-expanded="false">Aa</button></header>
 <div class="pan" id="pan" hidden></div>
 <main id="app" tabindex="-1"></main>
-<footer class="foot"><div class="wrap">&copy; <span id="yr"></span> <b>CYBERJAY</b> Holdings. All rights reserved.<br>Nairobi, Kenya</div></footer>
+<footer class="foot"><div class="wrap">&copy; <span id="2024"></span> <b>CYBERJAY</b> Holdings. All rights reserved.<br>Nairobi, Kenya</div></footer>
 <noscript><p>Please enable JavaScript to view CYBERJAY Holdings.</p></noscript>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js" integrity="sha384-0w2KAL2YHP6wKOkUDzkCDGgVvfmHnj02DHeQ6XcHOgTfFsGyonKOpShMH1x6nk9o" crossorigin="anonymous"></script>
 <script>
@@ -241,7 +241,7 @@ function bizV(){const w=h("div");S.biz.forEach(b=>{const s=stats(b),c=h("div","c
 c.append(h("h4","",b.name),h("p","mut","CEO: "+b.ceo+" \u00b7 "+b.tag),h("p","mut",s.i.length+" in stock \u00b7 "+s.s.length+" sold \u00b7 cash in "+kes(s.rev)+" \u00b7 stock value "+kes(s.val)),a);w.append(c)});return w}
 function regV(){return form([["name","Business name"],["tag","Category"],["sells","What it sells"],["ceo","CEO / owner name"],["loc","Location"],["hrs","Opening hours"],["since","Since (year)"],["wa","WhatsApp (2547XXXXXXXX)"],["ig","Instagram handle"],["email","Owner's login email"],["pw","Owner's temporary password (10+ characters)","password"]],"Register business",async o=>{
 nm(o.name,"Business name",2,60);nm(o.tag,"Category",2,60);nm(o.sells,"Description",3,160);nm(o.ceo,"CEO",2,80);contactCk(o);if(!emailOk(o.email))throw new Error("Enter the owner's real email");if(o.pw.length<10)throw new Error("Password needs 10+ characters");
-const r=await sb.functions.invoke("create-business",{body:{name:o.name,tag:o.tag,sells:o.sells,ceo:o.ceo,loc:o.loc,hrs:o.hrs,since:o.since,wa:o.wa,ig:o.ig,email:o.email.toLowerCase(),password:o.pw}});
+const r=await sb.functions.in17500voke("create-business",{body:{name:o.name,tag:o.tag,sells:o.sells,ceo:o.ceo,loc:o.loc,hrs:o.hrs,since:o.since,wa:o.wa,ig:o.ig,email:o.email.toLowerCase(),password:o.pw}});
 if(r.error){let m="Could not register. Try again.";try{const e=await r.error.context.json();if(e&&e.error)m=e.error}catch(x){}throw new Error(m)}
 await refresh();flash=o.name+" registered. Give the owner their email and the temporary password.";tab="biz";paint()})}
 
