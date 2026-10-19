@@ -3,12 +3,13 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-yflgOWvUK1g/NIrqVuDjhs52pCd9aSBxc7i4KajaJ0s=' https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js; style-src 'sha256-W91+tbSm1mq9KDwKHHbPUvL2XivUh7BEK+0h28ZK+V4=' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https://hzfkjqmhpalmybaqsdql.supabase.co; connect-src https://hzfkjqmhpalmybaqsdql.supabase.co wss://hzfkjqmhpalmybaqsdql.supabase.co; form-action 'none'; base-uri 'none'; object-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-HuLzxAfAn7s/x5016o+3x+KpAXxnYk8ksT2uP3bP6qw=' https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js; style-src 'sha256-W91+tbSm1mq9KDwKHHbPUvL2XivUh7BEK+0h28ZK+V4=' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https://hzfkjqmhpalmybaqsdql.supabase.co; connect-src https://hzfkjqmhpalmybaqsdql.supabase.co wss://hzfkjqmhpalmybaqsdql.supabase.co; form-action 'none'; base-uri 'none'; object-src 'none'">
 <meta name="referrer" content="no-referrer">
 <meta name="theme-color" content="#0a0e17">
 <meta name="description" content="CYBERJAY Holdings: a house of businesses. Network, systems and security equipment, services and resale in Nairobi.">
 <title>CYBERJAY Holdings | Businesses & Marketplace</title>
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='9' fill='%23e11d48'/%3E%3Ctext x='16' y='22' font-size='17' font-weight='700' text-anchor='middle' fill='white' font-family='sans-serif'%3ECJ%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://hzfkjqmhpalmybaqsdql.supabase.co" crossorigin>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Sora:wght@300;400;500;600;700&family=Poppins:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;700&family=Nunito:wght@400;600;700&family=Playfair+Display:wght@500;700&display=swap" rel="stylesheet">
@@ -111,6 +112,17 @@ textarea{width:100%;min-height:220px;padding:1rem;border-radius:18px;border:1px 
 <main id="app" tabindex="-1"></main>
 <footer class="foot"><div class="wrap">&copy; <span id="yr"></span> <b>CYBERJAY</b> Holdings. All rights reserved.<br>Nairobi, Kenya</div></footer>
 <noscript><p>Please enable JavaScript to view CYBERJAY Holdings.</p></noscript>
+<!-- EDITABLE WORDS: change the text inside the quotes on the right. Keep the quotes, commas and braces. Safe to edit. -->
+<script type="application/json" id="txt">
+{
+ "eyebrow": "CYBERJAY Holdings · Nairobi",
+ "line1": "One house.",
+ "lead": "Browse what is on sale, build your shopping list, and finish the purchase on WhatsApp with the business owner.",
+ "bizTitle": "Our businesses",
+ "bizSub": "Each business runs its own storefront, stock and contact line under the CYBERJAY name.",
+ "aboutLead": "CYBERJAY Holdings is the parent company behind a family of Nairobi businesses. It began with network, systems and security work and now hosts independent storefronts under one trusted name."
+}
+</script>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js" integrity="sha384-0w2KAL2YHP6wKOkUDzkCDGgVvfmHnj02DHeQ6XcHOgTfFsGyonKOpShMH1x6nk9o" crossorigin="anonymous"></script>
 <script>
 "use strict";
@@ -119,11 +131,13 @@ const SB_URL="https://hzfkjqmhpalmybaqsdql.supabase.co",SB_KEY="sb_publishable_j
 const D=864e5;
 let S={biz:[]},me=null,tab="stock",flash="",tip="",timer=0,idle=0,ready=false,fail="",rid=0;const cart={};
 const sb=window.supabase?window.supabase.createClient(SB_URL,SB_KEY,{auth:{storage:window.sessionStorage,persistSession:true,autoRefreshToken:true,detectSessionInUrl:false}}):null;
+let last=0,sig="";
+const TX=(()=>{try{return JSON.parse(document.getElementById("txt").textContent)}catch(e){return{}}})(),T=(k,d)=>typeof TX[k]==="string"&&TX[k].trim()?TX[k]:d,pub=()=>S.biz.filter(x=>!x.hidden);
 async function refresh(){if(!sb){fail="Could not load the database library.";return false}
 const [a,b]=await Promise.all([sb.from("businesses").select("*").order("sort").order("created_at"),sb.from("items").select("*")]);
 if(a.error||b.error){fail="Could not load data. Please refresh.";return false}fail="";
-S.biz=a.data.map(x=>({id:x.slug,uid:x.id,name:x.name,tag:x.tag,sells:x.sells,ceo:x.ceo,loc:x.loc,hrs:x.hrs,since:x.since,wa:x.wa,ig:x.ig,services:x.services||[],
-items:b.data.filter(i=>i.business_id===x.id).map(i=>({id:i.id,n:i.name,p:i.price,img:i.img?SB_URL+"/storage/v1/object/public/item-photos/"+i.img.split("/").map(encodeURIComponent).join("/"):"",sold:i.sold,t:Date.parse(i.listed_at),s:i.sold_at?Date.parse(i.sold_at):0}))}));ready=true;return true}
+const n=a.data.map(x=>({id:x.slug,hidden:!!x.hidden,uid:x.id,name:x.name,tag:x.tag,sells:x.sells,ceo:x.ceo,loc:x.loc,hrs:x.hrs,since:x.since,wa:x.wa,ig:x.ig,services:x.services||[],
+items:b.data.filter(i=>i.business_id===x.id).map(i=>({id:i.id,n:i.name,p:i.price,img:i.img?SB_URL+"/storage/v1/object/public/item-photos/"+i.img.split("/").map(encodeURIComponent).join("/"):"",sold:i.sold,t:Date.parse(i.listed_at),s:i.sold_at?Date.parse(i.sold_at):0}))}));last=Date.now();const g=JSON.stringify(n),ch=g!==sig;sig=g;S.biz=n;ready=true;try{sessionStorage.setItem("cj-c",g)}catch(e){}return ch}
 const $=s=>document.querySelector(s),app=$("#app");
 const h=(t,c,x)=>{const e=document.createElement(t);if(c)e.className=c;if(x!=null)e.textContent=x;return e};
 const P={ig:'<rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><path d="M17.5 6.5h.01"/>',
@@ -153,15 +167,15 @@ addEventListener("keydown",e=>{if(e.key==="Escape")p.hidden=true});applyPf()})()
 /* ---------- storefront ---------- */
 function slider(){const w=h("div","slw"),car=h("div","car"),dots=h("div","dots");let ix=0;
 const go=i=>{ix=i;car.scrollTo({left:i*car.clientWidth,behavior:"smooth"})},mark=()=>{const i=Math.round(car.scrollLeft/car.clientWidth);[...dots.children].forEach((d,k)=>d.classList.toggle("on",k===i));ix=i};
-S.biz.forEach((b,i)=>{const a=h("a","sl");a.href="#/b/"+b.id;const f=b.items.find(x=>!x.sold)||b.items[0],im=h("img");im.src=(f&&safeImg(f.img))||ph(b.name);im.alt=b.name;const o=h("div","ov");o.append(h("span","eyebrow",b.tag),h("h3","",b.name),h("p","",b.sells),h("span","btn p","Shop now"));a.append(im,o);car.append(a);const d=h("button","dot");d.setAttribute("aria-label","Show "+b.name);d.addEventListener("click",()=>go(i));dots.append(d)});
-car.addEventListener("scroll",mark);if(!matchMedia("(prefers-reduced-motion:reduce)").matches)timer=setInterval(()=>go((ix+1)%S.biz.length),4500);setTimeout(mark,0);w.append(car,dots);return w}
+pub().forEach((b,i)=>{const a=h("a","sl");a.href="#/b/"+b.id;const f=b.items.find(x=>!x.sold)||b.items[0],im=h("img");im.src=(f&&safeImg(f.img))||ph(b.name);im.alt=b.name;const o=h("div","ov");o.append(h("span","eyebrow",b.tag),h("h3","",b.name),h("p","",b.sells),h("span","btn p","Shop now"));a.append(im,o);car.append(a);const d=h("button","dot");d.setAttribute("aria-label","Show "+b.name);d.addEventListener("click",()=>go(i));dots.append(d)});
+car.addEventListener("scroll",mark);if(!matchMedia("(prefers-reduced-motion:reduce)").matches)timer=setInterval(()=>go((ix+1)%pub().length),4500);setTimeout(mark,0);w.append(car,dots);return w}
 function home(){const f=document.createDocumentFragment(),s=h("section","hero"),w=h("div","wrap");
-w.append(h("p","eyebrow","CYBERJAY Holdings \u00b7 Nairobi"));
-const t=h("h1");t.append("One house.",document.createElement("br"));t.append(h("em","",S.biz.length+" businesses."));
-w.append(t,h("p","lead","Browse what is on sale, build your shopping list, and finish the purchase on WhatsApp with the business owner."));
+w.append(h("p","eyebrow",T("eyebrow","CYBERJAY Holdings \u00b7 Nairobi")));
+const t=h("h1");t.append(T("line1","One house."),document.createElement("br"));t.append(h("em","",pub().length+" businesses."));
+w.append(t,h("p","lead",T("lead","Browse what is on sale, build your shopping list, and finish the purchase on WhatsApp with the business owner.")));
 const r=h("div","row"),b1=h("button","btn p","Explore businesses");b1.dataset.scroll="biz";b1.append(ic("ar"));const a2=h("a","btn g","Business login");a2.href="#/chamber";a2.prepend(ic("lk"));r.append(b1,a2);w.append(r,slider());s.append(w);
-const sh=h("section","sheet");sh.id="biz";const sw=h("div","wrap"),hd=h("div","sh");hd.append(h("h2","","Our businesses"),h("p","","Each business runs its own storefront, stock and contact line under the CYBERJAY name."));
-const g=h("div","grid");S.biz.forEach((b,i)=>{const a=h("a","card slot");a.href="#/b/"+b.id;a.append(h("span","num","0"+(i+1)),h("h3","",b.name),h("span","chip",b.tag),h("p","",b.sells),h("span","chip",stats(b).i.length+" in stock"));const go=h("span","go","Visit business");go.append(ic("ar"));a.append(go);g.append(a)});
+const sh=h("section","sheet");sh.id="biz";const sw=h("div","wrap"),hd=h("div","sh");hd.append(h("h2","",T("bizTitle","Our businesses")),h("p","",T("bizSub","Each business runs its own storefront, stock and contact line under the CYBERJAY name.")));
+const g=h("div","grid");pub().forEach((b,i)=>{const a=h("a","card slot");a.href="#/b/"+b.id;a.append(h("span","num","0"+(i+1)),h("h3","",b.name),h("span","chip",b.tag),h("p","",b.sells),h("span","chip",stats(b).i.length+" in stock"));const go=h("span","go","Visit business");go.append(ic("ar"));a.append(go);g.append(a)});
 sw.append(hd,g);sh.append(sw);f.append(s,sh);return f}
 function tog(b,x){const a=cart[b.id]=cart[b.id]||[],i=a.indexOf(x.id);if(i<0)a.push(x.id);else a.splice(i,1);route(true)}
 function cartCard(b){const its=(cart[b.id]||[]).map(i=>b.items.find(x=>x.id===i)).filter(x=>x&&!x.sold);if(!its.length)return null;
@@ -185,7 +199,7 @@ if(i.sold){const m=h("div","mark");m.append(h("span","","SOLD"));p.append(m)}
 const n=h("div","inf");n.append(h("h4","",i.n),h("span","pr",kes(i.p)));
 if(i.sold)n.append(h("span","chip","No longer available"));else{const a=inl.includes(i.id),x=h("button","btn "+(a?"g":"p"),a?"Added \u2713 Remove":"Add to list");x.addEventListener("click",()=>tog(b,i));n.append(x)}
 c.append(p,n);g.append(c)});w2.append(g);s2.append(w2);f.append(s,s1,s2);return f}
-function about(){const f=document.createDocumentFragment(),s=h("section","hero"),w=h("div","wrap");w.append(h("p","eyebrow","About"),h("h1","","CYBERJAY Holdings"),h("p","lead","CYBERJAY Holdings is the parent company behind a family of Nairobi businesses. It began with network, systems and security work and now hosts independent storefronts under one trusted name."));s.append(w);
+function about(){const f=document.createDocumentFragment(),s=h("section","hero"),w=h("div","wrap");w.append(h("p","eyebrow","About"),h("h1","","CYBERJAY Holdings"),h("p","lead",T("aboutLead","CYBERJAY Holdings is the parent company behind a family of Nairobi businesses. It began with network, systems and security work and now hosts independent storefronts under one trusted name.")));s.append(w);
 const sh=h("section","sheet"),sw=h("div","wrap"),g=h("div","cols");
 [["Trust first","Direct contact with each owner. No middlemen, no hidden checkout."],["Honest stock","Items are stamped SOLD the moment they go, so you never chase a ghost listing."],["Private by design","The public pages take no payments and collect nothing about visitors."]].forEach(([a,b])=>{const c=h("div","card");c.append(h("h3","",a),h("p","mut",b));g.append(c)});
 sw.append(g);sh.append(sw);f.append(s,sh);return f}
@@ -239,10 +253,11 @@ nm(o.sells,"Description",3,160);nm(o.ceo,"CEO",2,80);contactCk(o);const services
 await db(sb.from("businesses").update({sells:o.sells,services,ceo:o.ceo,loc:o.loc,hrs:o.hrs,since:o.since,wa:o.wa,ig:o.ig}).eq("id",b.uid));await refresh();flash="Profile saved.";tab="stock";paint()})}
 function pwV(){return form([["a","New password (10+ characters)","password"],["c","Repeat new password","password"]],"Change password",async o=>{if(o.a.length<10||o.a.length>72)throw new Error("Password must be 10-72 characters");if(o.a!==o.c)throw new Error("The two passwords do not match");
 await db(sb.auth.updateUser({password:o.a,data:{must_change:false}}));me.must=false;flash="Password changed.";tab=me.role==="holding"?"biz":"stock";paint()})}
-function bizV(){const w=h("div");S.biz.forEach(b=>{const s=stats(b),c=h("div","card rowc"),r=h("div","row"),a=h("a","btn g","View storefront"),x=h("button","btn g","Remove business");a.href="#/b/"+b.id;
+function bizV(){const w=h("div");S.biz.forEach(b=>{const s=stats(b),c=h("div","card rowc"),r=h("div","row"),a=h("a","btn g","View storefront"),x=h("button","btn g","Remove business"),hb=h("button","btn g",b.hidden?"Show publicly":"Hide from public");a.href="#/b/"+b.id;
 x.addEventListener("click",async()=>{const t=prompt("This permanently deletes "+b.name+", all its items, photos and its owner login.\nType the business name exactly to confirm:");if(t!==b.name)return;x.disabled=true;
 const q=await sb.functions.invoke("create-business",{body:{action:"delete",slug:b.id}});if(q.error){let m="Could not remove the business.";try{const e=await q.error.context.json();if(e&&e.error)m=e.error}catch(z){}flash=m}else{await refresh();flash=b.name+" removed."}paint()});
-r.append(a,x);c.append(h("h4","",b.name),h("p","mut","CEO: "+b.ceo+" \u00b7 "+b.tag),h("p","mut",s.i.length+" in stock \u00b7 "+s.s.length+" sold \u00b7 cash in "+kes(s.rev)+" \u00b7 stock value "+kes(s.val)),r);w.append(c)});return w}
+hb.addEventListener("click",async()=>{const nh=!b.hidden;try{await db(sb.from("businesses").update({hidden:nh}).eq("id",b.uid));await refresh();flash=b.name+(nh?" is now hidden from customers.":" is now visible to customers.")}catch(e){flash=e.message}paint()});
+r.append(a,hb,x);c.append(h("h4","",b.name+(b.hidden?" (hidden from public)":"")),h("p","mut","CEO: "+b.ceo+" \u00b7 "+b.tag),h("p","mut",s.i.length+" in stock \u00b7 "+s.s.length+" sold \u00b7 cash in "+kes(s.rev)+" \u00b7 stock value "+kes(s.val)),r);w.append(c)});return w}
 function regV(){return form([["name","Business name"],["tag","Category"],["sells","What it sells"],["ceo","CEO / owner name"],["loc","Location"],["hrs","Opening hours"],["since","Since (year)"],["wa","WhatsApp (2547XXXXXXXX)"],["ig","Instagram handle"],["email","Owner's login email"],["pw","Owner's temporary password (10+ characters)","password"]],"Register business",async o=>{
 nm(o.name,"Business name",2,60);nm(o.tag,"Category",2,60);nm(o.sells,"Description",3,160);nm(o.ceo,"CEO",2,80);contactCk(o);if(!emailOk(o.email))throw new Error("Enter the owner's real email");if(o.pw.length<10)throw new Error("Password needs 10+ characters");
 const r=await sb.functions.invoke("create-business",{body:{name:o.name,tag:o.tag,sells:o.sells,ceo:o.ceo,loc:o.loc,hrs:o.hrs,since:o.since,wa:o.wa,ig:o.ig,email:o.email.toLowerCase(),password:o.pw}});
@@ -251,18 +266,19 @@ await refresh();flash=o.name+" registered. Give the owner their email and the te
 
 /* ---------- router ---------- */
 async function route(keep){const id=++rid;clearInterval(timer);const y=scrollY,hs=location.hash.replace(/^#\/?/,"").split("/"),k=hs[0];
-if(!keep&&k!=="about"){if(!ready)app.replaceChildren(h("p","load","Loading\u2026"));await refresh();if(id!==rid)return}
-if(!ready&&k!=="about"){app.replaceChildren(h("p","load",fail||"Loading\u2026"));return}
+if(!keep&&k!=="about"&&ready&&Date.now()-last>3e4)refresh().then(ch=>{if(ch&&id===rid)route(true)});
+if(!ready&&k!=="about"){app.replaceChildren(h("p","load",fail||"Loading\u2026"));await refresh();if(id!==rid)return;if(!ready){app.replaceChildren(h("p","load",fail||"Please refresh the page."));return}}
 let v,n="home";
 if(k==="b"){const b=S.biz.find(x=>x.id===hs[1]);if(b){v=biz(b);n="b";document.title=b.name+" | CYBERJAY Holdings"}}
 else if(k==="about"){v=about();n="about"}else if(k==="chamber"){v=chamber();n="chamber"}
 if(!v){v=home();n="home"}if(n==="home")document.title="CYBERJAY Holdings | Businesses & Marketplace";
 app.replaceChildren(v);document.querySelectorAll("#menu a").forEach(a=>a.classList.toggle("on",a.dataset.r===n));
-if(keep)scrollTo({top:y,behavior:"instant"});else{scrollTo(0,0);$("#pan").hidden=true}}
+if(keep)scrollTo({top:y,behavior:"instant"});else{scrollTo({top:0,behavior:"instant"});$("#pan").hidden=true}}
 document.addEventListener("click",e=>{const t=e.target.closest("[data-scroll]");if(t){const el=document.getElementById(t.dataset.scroll);if(el)el.scrollIntoView({behavior:"smooth"})}});
 $("#yr").textContent=new Date().getFullYear();
 addEventListener("hashchange",()=>route());
-(async()=>{await refresh();await restore();route(true)})();
+(async()=>{try{const c=JSON.parse(sessionStorage.getItem("cj-c"));if(Array.isArray(c)&&c.length){S.biz=c;ready=true;route(true)}}catch(e){}
+await refresh();await restore();route(true)})();
 </script>
 </body>
 </html>
