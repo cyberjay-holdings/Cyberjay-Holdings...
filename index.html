@@ -3,10 +3,20 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-AavrwMdmbsP7pA7FvCKMbk+FQtFlE6q5jwgqlzHsvVY=' https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js; style-src 'sha256-W91+tbSm1mq9KDwKHHbPUvL2XivUh7BEK+0h28ZK+V4=' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https://hzfkjqmhpalmybaqsdql.supabase.co; connect-src https://hzfkjqmhpalmybaqsdql.supabase.co wss://hzfkjqmhpalmybaqsdql.supabase.co; form-action 'none'; base-uri 'none'; object-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-8mNpWJhll5AaKWn1ZBIf9zQDKvH3C+eV7bN9qkGRPFI=' https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js; style-src 'sha256-JjviontIoFXw7yRHCkUWNvE9U6zt1pf4Ky8uV6D+qxs=' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https://hzfkjqmhpalmybaqsdql.supabase.co; connect-src https://hzfkjqmhpalmybaqsdql.supabase.co wss://hzfkjqmhpalmybaqsdql.supabase.co; form-action 'none'; base-uri 'none'; object-src 'none'">
 <meta name="referrer" content="no-referrer">
 <meta name="theme-color" content="#0a0e17">
 <meta name="description" content="CYBERJAY Holdings: a house of businesses. Network, systems and security equipment, services and resale in Nairobi.">
+<link rel="canonical" href="https://josephkmungai.github.io/Cyberjay-Holdings/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="CYBERJAY Holdings">
+<meta property="og:title" content="CYBERJAY Holdings | Businesses &amp; Marketplace">
+<meta property="og:description" content="Browse stock from the CYBERJAY family of businesses and order straight on WhatsApp.">
+<meta property="og:url" content="https://josephkmungai.github.io/Cyberjay-Holdings/">
+<meta property="og:image" content="https://josephkmungai.github.io/Cyberjay-Holdings/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
 <title>CYBERJAY Holdings | Businesses & Marketplace</title>
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='9' fill='%23e11d48'/%3E%3Ctext x='16' y='22' font-size='17' font-weight='700' text-anchor='middle' fill='white' font-family='sans-serif'%3ECJ%3C/text%3E%3C/svg%3E">
 <link rel="preconnect" href="https://hzfkjqmhpalmybaqsdql.supabase.co" crossorigin>
@@ -104,12 +114,13 @@ textarea{width:100%;min-height:220px;padding:1rem;border-radius:18px;border:1px 
 @media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
 
 .load{padding:9rem 2rem;text-align:center;color:var(--mut)}
+.load .btn{margin-top:1rem}
 </style>
 </head>
 <body>
 <!-- ============ EDIT YOUR WORDS HERE ============
  Change ONLY the text on the right side of each line (inside the quotes). Keep the quotes, commas and { } braces.
- Menu labels and the footer are plain HTML below, edit them directly. Do NOT edit anything inside <script> or <style>. -->
+ Menu labels and the footer are plain HTML below, edit them directly. Do NOT edit anything inside the script or style sections lower down. -->
 <script type="application/json" id="txt">
 {
  "eyebrow": "CYBERJAY Holdings · Nairobi",
@@ -306,9 +317,10 @@ if(r.error){let m="Could not register. Try again.";try{const e=await r.error.con
 await refresh();flash=o.name+" registered. Give the owner their email and the temporary password.";tab="biz";paint()})}
 
 /* ---------- router ---------- */
+function loadErr(){const d=h("div","load");d.append(h("p","","We could not load the businesses. Check your internet connection and try again."));const b=h("button","btn p","Try again");b.addEventListener("click",()=>location.reload());d.append(b);return d}
 async function route(keep){const id=++rid;clearInterval(timer);const y=scrollY,hs=location.hash.replace(/^#\/?/,"").split("/"),k=hs[0];
 if(!keep&&k!=="about"&&ready&&Date.now()-last>3e4)refresh().then(ch=>{if(ch&&id===rid)route(true)});
-if(!ready&&k!=="about"){app.replaceChildren(h("p","load",fail||"Loading\u2026"));await refresh();if(id!==rid)return;if(!ready){app.replaceChildren(h("p","load",fail||"Please refresh the page."));return}}
+if(!ready&&k!=="about"){app.replaceChildren(h("p","load",fail||"Loading\u2026"));await refresh();if(id!==rid)return;if(!ready){app.replaceChildren(loadErr());return}}
 let v,n="home";
 if(k==="b"){const b=S.biz.find(x=>x.id===hs[1]);if(b){v=biz(b);n="b";document.title=b.name+" | CYBERJAY Holdings"}}
 else if(k==="about"){v=about();n="about"}else if(k==="chamber"){v=chamber();n="chamber"}
