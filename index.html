@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-gLX5sy4FKVlNk6PYvd7o7awe5t2hFeK1BcHOCVk1GNo=' https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js; style-src 'sha256-rI9KqV+Rv6poGM0bKOIlNYD0+yHvP2Xx9lzX56mk8FQ=' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https://hzfkjqmhpalmybaqsdql.supabase.co; connect-src https://hzfkjqmhpalmybaqsdql.supabase.co wss://hzfkjqmhpalmybaqsdql.supabase.co; form-action 'none'; base-uri 'none'; object-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-sYN7Ll+Oax0RL+KIGUIFoRpB/Vs814fZ8zeqVQLMWfU=' https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js; style-src 'sha256-rI9KqV+Rv6poGM0bKOIlNYD0+yHvP2Xx9lzX56mk8FQ=' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https://hzfkjqmhpalmybaqsdql.supabase.co; connect-src https://hzfkjqmhpalmybaqsdql.supabase.co wss://hzfkjqmhpalmybaqsdql.supabase.co; form-action 'none'; base-uri 'none'; object-src 'none'">
 <meta name="referrer" content="no-referrer">
 <meta name="theme-color" content="#0a0a0b">
 <title>CYBERJAY Holdings | Businesses &amp; Marketplace</title>
@@ -732,11 +732,12 @@ function loadErr(){const d=h("div","load");d.append(h("p","","We could not load 
 async function route(keep){const id=++rid;clearInterval(timer);const y=scrollY,hs=location.hash.replace(/^#\/?/,"").split("/"),k=hs[0];
 if(!keep&&k!=="about"&&ready&&Date.now()-last>3e4)refresh().then(ch=>{if(ch&&id===rid)route(true)});
 if(!ready&&k!=="about"){app.replaceChildren(loadView(fail));await refresh();if(id!==rid)return;if(!ready){app.replaceChildren(loadErr());hideBoot();return}}
-let v,n="home";
+let v,n="home";try{
 if(k==="b"){const b=S.biz.find(x=>x.id===hs[1]);if(b){v=biz(b);n="b";document.title=b.name+" | CYBERJAY Holdings"}}
 else if(k==="about"){v=about();n="about"}else if(k==="chamber"){v=chamber();n="chamber"}else if(k==="join"){v=join();n="join"}else if(k==="terms"){v=terms();n="terms"}
 if(!v){v=home();n="home"}if(n==="home")document.title="CYBERJAY Holdings | Businesses & Marketplace";
-app.replaceChildren(v);if(!keep){app.classList.remove("pg");void app.offsetWidth;app.classList.add("pg");CJL.nav()}document.querySelectorAll("#menu a").forEach(a=>a.classList.toggle("on",a.dataset.r===n));
+app.replaceChildren(v)}catch(err){console.error(err);const m=h("div","card");m.append(h("h3","","This page could not load"),h("p","mut","Please refresh the page. If it keeps happening, send this message to support: "+String(err&&err.message||err).slice(0,160)));app.replaceChildren(m);hideBoot();return}
+if(!keep){app.classList.remove("pg");void app.offsetWidth;app.classList.add("pg");CJL.nav()}document.querySelectorAll("#menu a").forEach(a=>a.classList.toggle("on",a.dataset.r===n));
 if(keep)scrollTo({top:y,behavior:"instant"});else{scrollTo({top:0,behavior:"instant"});$("#pan").hidden=true}hideBoot()}
 document.addEventListener("click",e=>{const t=e.target.closest("[data-scroll]");if(t){const el=document.getElementById(t.dataset.scroll);if(el)el.scrollIntoView({behavior:"smooth"})}});
 $("#yr").textContent=new Date().getFullYear();$(".foot .wrap").prepend(soc2());
