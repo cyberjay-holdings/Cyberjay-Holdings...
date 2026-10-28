@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-3dsZR3sqkuAl396IG/jntTErzqEoadbklq7wTV4nK2g=' https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js; style-src 'sha256-QE7PunOPnrncxJx5My5SwlERxZERUibXEx4DztNxVQ4=' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https://hzfkjqmhpalmybaqsdql.supabase.co; connect-src https://hzfkjqmhpalmybaqsdql.supabase.co wss://hzfkjqmhpalmybaqsdql.supabase.co; form-action 'none'; base-uri 'none'; object-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-kKlWPFNUCrXkkMQeEubvhfP1cf3aJlwtlMUpOOZuR/Q=' https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js; style-src 'sha256-rI9KqV+Rv6poGM0bKOIlNYD0+yHvP2Xx9lzX56mk8FQ=' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https://hzfkjqmhpalmybaqsdql.supabase.co; connect-src https://hzfkjqmhpalmybaqsdql.supabase.co wss://hzfkjqmhpalmybaqsdql.supabase.co; form-action 'none'; base-uri 'none'; object-src 'none'">
 <meta name="referrer" content="no-referrer">
 <meta name="theme-color" content="#0a0a0b">
 <title>CYBERJAY Holdings | Businesses &amp; Marketplace</title>
@@ -128,6 +128,16 @@ input[type=search]{width:100%;margin:0 0 1.2rem;padding:.85rem 1.3rem;border-rad
 .vf{background:var(--ac);color:var(--on);border-color:var(--ac);font-weight:700;letter-spacing:.05em;font-size:.72rem;display:inline-flex;align-items:center;gap:.35rem;padding:.3rem .85rem}.vf .ic{width:1.15em;height:1.15em}
 .trust{display:flex;gap:1rem;align-items:flex-start;margin-bottom:1.2rem}.trust .ic{width:2.4rem;height:2.4rem;flex:none;color:var(--mut)}.trust.ok{border-color:var(--ac);background:color-mix(in srgb,var(--ac) 10%,var(--card))}.trust.ok .ic{color:var(--acT)}
 .vfbtn{margin-bottom:1.2rem}.foot a{color:var(--acT);text-decoration:underline}
+.sld{position:relative;width:100%;height:100%}.sldt{display:flex;height:100%;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;overscroll-behavior-x:contain;cursor:pointer}.sldt::-webkit-scrollbar{display:none}
+.sldt img,.it:hover .sld img{flex:0 0 100%;width:100%;height:100%;object-fit:cover;scroll-snap-align:center;scroll-snap-stop:always;transform:none}
+.sa{position:absolute;top:50%;translate:0 -50%;width:34px;height:34px;border-radius:50%;border:0;background:rgba(0,0,0,.55);color:#fff;font-size:1.4rem;line-height:1;cursor:pointer;opacity:0;transition:opacity .2s}.sa.l{left:.5rem}.sa.r{right:.5rem}.sld:hover .sa,.sa:focus-visible{opacity:1}
+@media(hover:none){.sa{display:none}}
+.dots{position:absolute;bottom:.5rem;left:0;right:0;display:flex;justify-content:center;gap:.35rem;pointer-events:none}.dots i{width:7px;height:7px;border-radius:50%;background:rgba(255,255,255,.5)}.dots i.on{background:#fff;box-shadow:0 0 0 1px rgba(0,0,0,.35)}
+.dsc{color:var(--mut);font-size:.88rem;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;overflow-wrap:anywhere}
+.ovl{position:fixed;inset:0;z-index:99999;background:rgba(0,0,0,.74);display:grid;place-items:center;padding:1rem;overflow:auto}
+.dlg{width:min(560px,100%);max-height:94vh;overflow:auto;padding:0;border-radius:28px;display:flex;flex-direction:column;gap:.4rem}
+.dlg .sld{aspect-ratio:4/3;height:auto;background:var(--bg2)}.dlg .sldt{cursor:default}.dlg .inf{padding:1rem 1.3rem}.dlg>.btn{margin:0 1.3rem 1.3rem}
+.full{white-space:pre-wrap;overflow-wrap:anywhere}.frm textarea{min-height:110px;font:inherit;resize:vertical}
 .thumbs{display:flex;gap:.4rem;padding:.6rem .8rem 0;overflow-x:auto}.th2{width:52px;height:52px;border-radius:12px;border:1px solid var(--line);padding:0;overflow:hidden;background:var(--bg2);flex:none}.th2 img{width:100%;height:100%;object-fit:cover;display:block}
 .svc .pic,.it.svc .pic{aspect-ratio:4/3}
 .sl{aspect-ratio:16/7;min-height:220px}
@@ -274,8 +284,8 @@ input[type=search]{width:100%;margin:0 0 1.2rem;padding:.85rem 1.3rem;border-rad
  "joinLead": "Fill in your details and choose a password. Your business goes live on the marketplace straight away and starts with a 14-day Premium trial, with a new member discount on Premium afterwards. No waiting for approval.",
  "searchPh": "Search businesses, products or places...",
  "priceFree": "Free",
- "priceStandard": "KES 500 / month",
- "pricePremium": "KES 1,500 / month",
+ "priceStandard": "KES 299 / month",
+ "pricePremium": "KES 699 / month",
  "payNote": "Pay the holding admin as agreed (M-Pesa or WhatsApp). When he confirms your payment he activates your plan.",
  "holdingWa": "",
  "vTitle": "Verified Seller",
@@ -332,15 +342,15 @@ input[type=search]{width:100%;margin:0 0 1.2rem;padding:.85rem 1.3rem;border-rad
  "apptTitle": "Services & appointments",
  "apptSub": "Browse our past work, then book a time on WhatsApp.",
  "planDays": "30",
- "adWeek": "KES 300 / week",
- "adMonth": "KES 1,000 / month",
+ "adWeek": "KES 200 / week",
+ "adMonth": "KES 600 / month",
  "launchDate": "2026-11-01",
  "foundingDays": "10",
  "foundingPct": "35",
  "newPct": "20",
  "offerDays": "30",
- "premiumPrice": "1500",
- "standardPrice": "500"
+ "premiumPrice": "699",
+ "standardPrice": "299"
 }
 </script>
 <div id="topbar" aria-hidden="true"></div>
@@ -364,6 +374,7 @@ const PL={free:{n:"Free",lim:3},standard:{n:"Standard",lim:15},premium:{n:"Premi
 const KE=Object.fromEntries("Mombasa:Changamwe,Jomvu,Kisauni,Nyali,Likoni,Mvita|Kwale:Msambweni,Lunga Lunga,Matuga,Kinango,Ukunda (Diani)|Kilifi:Kilifi North,Kilifi South,Kaloleni,Rabai,Ganze,Malindi,Magarini|Tana River:Garsen,Galole,Bura|Lamu:Lamu East,Lamu West (Lamu Town),Mpeketoni|Taita-Taveta:Taveta,Wundanyi,Mwatate,Voi|Garissa:Garissa Township,Balambala,Lagdera,Dadaab,Fafi,Ijara|Wajir:Wajir East,Wajir West,Wajir North,Wajir South,Eldas,Tarbaj|Mandera:Mandera East,Mandera West,Mandera North,Mandera South,Banissa,Lafey|Marsabit:Moyale,North Horr,Saku (Marsabit Town),Laisamis|Isiolo:Isiolo,Merti,Garbatulla|Meru:Imenti North,Imenti South,Imenti Central,Tigania East,Tigania West,Igembe North,Igembe South,Igembe Central,Buuri|Tharaka-Nithi:Chuka,Igambang'ombe,Maara,Tharaka|Embu:Manyatta,Runyenjes,Mbeere North,Mbeere South|Kitui:Kitui Central,Kitui West,Kitui Rural,Kitui South,Kitui East,Mwingi North,Mwingi Central,Mwingi West|Machakos:Machakos Town,Mavoko (Athi River),Kangundo,Kathiani,Masinga,Matungulu,Mwala,Yatta|Makueni:Makueni,Mbooni,Kilome,Kaiti,Kibwezi East,Kibwezi West|Nyandarua:Ol Kalou,Kinangop,Kipipiri,Ndaragwa,Ol Jorok|Nyeri:Nyeri Town,Mathira,Othaya,Mukurweini,Tetu,Kieni|Kirinyaga:Kirinyaga Central,Kirinyaga East,Kirinyaga West,Mwea East,Mwea West|Murang'a:Kiharu,Kangema,Mathioya,Kigumo,Maragwa,Kandara,Gatanga|Kiambu:Kiambu Town,Thika,Ruiru,Juja,Limuru,Kikuyu,Githunguri,Gatundu South,Gatundu North,Kabete,Lari,Kiambaa|Turkana:Turkana Central (Lodwar),Turkana West (Kakuma),Turkana East,Turkana North,Turkana South,Loima|West Pokot:Kapenguria,Kacheliba,Sigor,Pokot South|Samburu:Samburu West (Maralal),Samburu North,Samburu East|Trans Nzoia:Kitale,Cherangany,Kwanza,Endebess,Saboti|Uasin Gishu:Eldoret,Turbo,Soy,Moiben,Kapseret,Kesses,Ainabkoi|Elgeyo-Marakwet:Keiyo North (Iten),Keiyo South,Marakwet East,Marakwet West|Nandi:Kapsabet,Aldai,Chesumei,Emgwen,Mosop,Nandi Hills,Tinderet|Baringo:Baringo Central (Kabarnet),Baringo North,Baringo South,Eldama Ravine,Mogotio,Tiaty|Laikipia:Laikipia East (Nanyuki),Laikipia West (Nyahururu),Laikipia North,Rumuruti|Nakuru:Nakuru Town East,Nakuru Town West,Naivasha,Gilgil,Molo,Njoro,Subukia,Rongai,Bahati,Kuresoi|Narok:Narok North,Narok South,Narok East,Narok West,Transmara East,Transmara West|Kajiado:Kajiado Central,Kajiado North (Ongata Rongai),Kajiado East (Kitengela),Kajiado West (Kiserian),Kajiado South (Loitokitok)|Kericho:Kericho Town,Ainamoi,Belgut,Bureti,Kipkelion East,Kipkelion West,Soin/Sigowet|Bomet:Bomet Central,Bomet East,Chepalungu,Konoin,Sotik|Kakamega:Lurambi,Mumias East,Mumias West,Malava,Butere,Khwisero,Navakholo,Likuyani,Lugari,Matungu,Ikolomani,Shinyalu|Vihiga:Vihiga,Sabatia,Hamisi,Emuhaya,Luanda|Bungoma:Kanduyi (Bungoma Town),Webuye East,Webuye West,Kimilili,Mt Elgon,Sirisia,Tongaren,Bumula,Kabuchai|Busia:Matayos (Busia Town),Nambale,Teso North,Teso South,Butula,Funyula,Budalangi|Siaya:Alego Usonga (Siaya Town),Bondo,Gem,Rarieda,Ugenya,Ugunja|Kisumu:Kisumu Central,Kisumu East,Kisumu West,Nyando,Muhoroni,Nyakach,Seme|Homa Bay:Homa Bay Town,Kabondo Kasipul,Karachuonyo,Kasipul,Mbita,Ndhiwa,Rangwe,Suba|Migori:Suna East (Migori Town),Suna West,Rongo,Awendo,Uriri,Nyatike,Kuria East,Kuria West|Kisii:Kisii Central,Kitutu Chache North,Kitutu Chache South,Nyaribari Chache,Nyaribari Masaba,Bobasi,Bonchari,South Mugirango|Nyamira:Nyamira,Borabu,Manga,Masaba North,Kitutu Masaba|Nairobi:Westlands,Dagoretti North,Dagoretti South (Kawangware),Langata,Kibra,Roysambu,Kasarani,Ruaraka,Embakasi South,Embakasi North,Embakasi Central,Embakasi East,Embakasi West,Makadara,Kamukunji,Starehe,Mathare".split("|").map(r=>{const i=r.indexOf(":");return[r.slice(0,i),r.slice(i+1).split(",")]}));
 const norm=t=>String(t).toLowerCase().replace(/['\u2019.]/g,"").replace(/\s+/g," ").trim(),KEC=Object.keys(KE).sort((a,c)=>c.length-a.length);
 const guessLoc=b=>{if(b.county||!b.loc)return;const L=norm(b.loc),c=KEC.find(k=>L.includes(norm(k)));if(!c)return;b.county=c;const tw=KE[c].find(t=>{const base=norm(t.replace(/\s*\(.*\)/,"")),al=(t.match(/\((.*)\)/)||[])[1];return L.includes(base)||(al&&L.includes(norm(al)))});if(tw)b.sub=tw};
+const okpA=p=>typeof p==="string"&&/^[\w-]{1,64}\/[\w.-]{1,120}$/.test(p)&&p.indexOf("..")<0;
 const pu=p=>p?SB_URL+"/storage/v1/object/public/item-photos/"+p.split("/").map(encodeURIComponent).join("/"):"";
 const today=()=>new Date().toISOString().slice(0,10),effPlan=x=>{const p=PL[x.plan]?x.plan:"free";return p==="free"||(x.plan_until&&x.plan_until<today())?"free":p};
 const MARK=(document.querySelector(".hdr .mark")||{}).src||"";
@@ -379,7 +390,7 @@ async function doRefresh(){if(!sb){fail="Could not load the database library.";r
 const [a,b]=await Promise.all([sb.from("businesses").select("*").order("sort").order("created_at"),sb.from("items").select("*")]);
 if(a.error||b.error){fail="Could not load data. Please refresh.";return false}fail="";
 const n=a.data.map(x=>({id:x.slug,hidden:!!x.hidden,approved:x.approved!==false,plan:effPlan(x),planRaw:PL[x.plan]?x.plan:"free",until:x.plan_until||"",trial:!!x.trial,adUntil:x.ad_until||"",adText:x.ad_text||"",joined:(x.created_at||"").slice(0,10),county:x.county||"",sub:x.subcounty||"",lmk:x.landmark||"",trialUntil:x.trial_until||"",offerUsed:!!x.offer_used,offerUsedAt:x.offer_used_at||"",verified:!!x.verified&&effPlan(x)!=="free",bp:x.banner||"",banner:x.banner?SB_URL+"/storage/v1/object/public/item-photos/"+x.banner.split("/").map(encodeURIComponent).join("/"):"",uid:x.id,name:x.name,tag:x.tag,sells:x.sells,ceo:x.ceo,loc:x.loc,hrs:x.hrs,since:x.since,wa:x.wa,ig:x.ig,services:x.services||[],
-items:b.data.filter(i=>i.business_id===x.id).map(i=>({id:i.id,n:i.name,p:i.price,img:i.img?SB_URL+"/storage/v1/object/public/item-photos/"+i.img.split("/").map(encodeURIComponent).join("/"):"",sold:i.sold,kind:i.kind==="service"?"service":"product",dur:i.duration||"",det:i.details||"",gp:i.gallery||[],gal:(i.gallery||[]).map(g=>pu(g)),q:i.qty,sq:i.sold_qty,rv:Number(i.revenue),t:Date.parse(i.listed_at),s:i.sold_at?Date.parse(i.sold_at):0}))}));n.forEach(guessLoc);last=Date.now();const g=JSON.stringify(n),ch=g!==sig;sig=g;S.biz=n;ready=true;try{sessionStorage.setItem("cj-c10",g)}catch(e){}return ch}
+items:b.data.filter(i=>i.business_id===x.id).map(i=>({id:i.id,n:i.name,p:i.price,img:okpA(i.img)?pu(i.img):"",sold:i.sold,kind:i.kind==="service"?"service":"product",dur:i.duration||"",det:i.details||"",gp:i.gallery||[],gal:(Array.isArray(i.gallery)?i.gallery:[]).filter(okpA).slice(0,4).map(g=>pu(g)),q:i.qty,sq:i.sold_qty,rv:Number(i.revenue),t:Date.parse(i.listed_at),s:i.sold_at?Date.parse(i.sold_at):0}))}));n.forEach(guessLoc);last=Date.now();const g=JSON.stringify(n),ch=g!==sig;sig=g;S.biz=n;ready=true;try{sessionStorage.setItem("cj-c10",g)}catch(e){}return ch}
 const $=s=>document.querySelector(s),app=$("#app");
 const h=(t,c,x)=>{const e=document.createElement(t);if(c)e.className=c;if(x!=null)e.textContent=x;return e};
 const P={ig:'<rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><path d="M17.5 6.5h.01"/>',
@@ -439,9 +450,29 @@ u.forEach(x=>{const r=h("div","svc"),m=h("button","btn g","\u2212"),pl=h("button
 const tot=u.reduce((a,x)=>a+x.p*n(x),0);c.append(h("p","pr",T("total","Total: ")+kes(tot)));
 const msg="Hello "+b.name+", I would like to buy:\n"+u.map((x,i)=>(i+1)+". "+n(x)+" x "+x.n+" - "+kes(x.p*n(x))).join("\n")+"\nTotal: "+kes(tot)+"\nPlease advise on transport and payment.";
 c.append(ext(wa(b,msg),"Purchase on WhatsApp","wa",T("purchase"," Purchase on WhatsApp"),"btn p"));return c}
-function svcCard(b,x){const c=h("article","card it svc"),p=h("div","pic"),im=h("img"),g=x.gal.map(safeImg).filter(Boolean);im.src=g[0]||ph(x.n);im.alt=x.n;im.loading="lazy";im.decoding="async";p.append(im);c.append(p);
-if(g.length>1){const t=h("div","thumbs");g.forEach((u,k)=>{const bt=h("button","th2"),ti=h("img");ti.src=u;ti.alt=x.n+" photo "+(k+1);ti.loading="lazy";bt.append(ti);bt.setAttribute("aria-label","Show photo "+(k+1));bt.addEventListener("click",()=>{im.src=u});t.append(bt)});c.append(t)}
-const n=h("div","inf");n.append(h("h4","",x.n),h("span","pr","From "+kes(x.p)),h("span","chip","\u23F1 "+(x.dur||"Ask for duration")));if(x.det)n.append(h("p","mut",x.det));
+const itemPics=i=>{const g=(i.gal||[]).map(safeImg).filter(Boolean).slice(0,4);if(g.length)return g;const m=safeImg(i.img);return[m||ph(i.n)]};
+function slider(alt,urls,onTap,big){const box=h("div","sld"+(big?" big":"")),tr=h("div","sldt"),n=urls.length;tr.setAttribute("role","group");tr.setAttribute("aria-label",alt+(n>1?", "+n+" photos. Swipe to see more":""));if(n>1)tr.tabIndex=0;
+urls.forEach((u,k)=>{const im=h("img");im.src=u;im.alt=alt+(n>1?" photo "+(k+1)+" of "+n:"");im.loading=k?"lazy":"eager";im.decoding="async";im.draggable=false;tr.append(im)});
+if(onTap)tr.addEventListener("click",onTap);box.append(tr);
+if(n>1){const dots=h("div","dots"),ds=urls.map(()=>h("i"));ds.forEach(d=>dots.append(d));
+const set=()=>{const k=Math.max(0,Math.min(n-1,Math.round(tr.scrollLeft/(tr.clientWidth||1))));ds.forEach((d,j)=>{d.className=j===k?"on":""})};set();tr.addEventListener("scroll",set,{passive:true});
+const mv=d=>tr.scrollBy({left:d*tr.clientWidth,behavior:"smooth"}),pv=h("button","sa l","\u2039"),nx=h("button","sa r","\u203A");pv.type="button";nx.type="button";pv.setAttribute("aria-label","Previous photo");nx.setAttribute("aria-label","Next photo");
+pv.addEventListener("click",e=>{e.stopPropagation();mv(-1)});nx.addEventListener("click",e=>{e.stopPropagation();mv(1)});box.append(pv,nx,dots)}
+return box}
+let ovl=null,ovlPrev=null;
+function closeInspect(){if(!ovl)return;ovl.remove();ovl=null;document.body.style.overflow="";document.removeEventListener("keydown",ovKey);if(ovlPrev&&ovlPrev.focus)ovlPrev.focus();ovlPrev=null}
+function ovKey(e){if(e.key==="Escape"){closeInspect();return}if(e.key==="Tab"&&ovl){const f=[...ovl.querySelectorAll("button,a[href]")].filter(z=>!z.disabled);if(!f.length)return;const a=f[0],z=f[f.length-1];if(e.shiftKey&&document.activeElement===a){e.preventDefault();z.focus()}else if(!e.shiftKey&&document.activeElement===z){e.preventDefault();a.focus()}}}
+function inspect(b,x){closeInspect();ovlPrev=document.activeElement;const svc=x.kind==="service",o=h("div","ovl"),d=h("div","dlg card"),cl=h("button","btn g","Close"),inf=h("div","inf");
+d.setAttribute("role","dialog");d.setAttribute("aria-modal","true");d.setAttribute("aria-label",x.n);cl.type="button";cl.addEventListener("click",closeInspect);o.addEventListener("click",e=>{if(e.target===o)closeInspect()});
+inf.append(h("h3","",x.n),h("span","pr",(svc?"From ":"")+kes(x.p)));
+if(svc)inf.append(h("span","chip","\u23F1 "+(x.dur||"Ask for duration")));else inf.append(h("span","chip",x.sold?T("gone","No longer available"):x.q+" available"));
+inf.append(h("p","full",x.det||"No description added yet."));
+if(svc)inf.append(ext(wa(b,"Hello "+b.name+", I would like to book an appointment for: "+x.n+" (from "+kes(x.p)+", "+(x.dur||"duration to confirm")+"). Please share your available dates and times."),"Book an appointment for "+x.n+" on WhatsApp","wa",T("book"," Book Appointment"),"btn p"));
+else if(!x.sold){const c=(cart[b.id]||[]).filter(z=>z===x.id).length,ad=h("button","btn "+(c?"g":"p"),c?T("added","Added \u2713")+" \u00d7"+c+" (+1)":T("addList","Add to list"));ad.type="button";ad.disabled=c>=x.q;ad.addEventListener("click",()=>{closeInspect();cartAdd(b,x,1)});inf.append(ad)}
+d.append(slider(x.n,itemPics(x),null,true),inf,cl);o.append(d);document.body.append(o);ovl=o;document.body.style.overflow="hidden";document.addEventListener("keydown",ovKey);cl.focus()}
+addEventListener("hashchange",closeInspect);
+function svcCard(b,x){const c=h("article","card it svc"),p=h("div","pic");p.append(slider(x.n,itemPics(x),()=>inspect(b,x)));c.append(p);
+const n=h("div","inf");n.append(h("h4","",x.n),h("span","pr","From "+kes(x.p)),h("span","chip","\u23F1 "+(x.dur||"Ask for duration")));if(x.det)n.append(h("p","dsc",x.det));const vd=h("button","btn g","View details");vd.type="button";vd.addEventListener("click",()=>inspect(b,x));n.append(vd);
 n.append(ext(wa(b,"Hello "+b.name+", I would like to book an appointment for: "+x.n+" (from "+kes(x.p)+", "+(x.dur||"duration to confirm")+"). Please share your available dates and times."),"Book an appointment for "+x.n+" on WhatsApp","wa",T("book"," Book Appointment"),"btn p"));c.append(n);return c}
 function biz(b){const f=document.createDocumentFragment(),s=h("section","hero"),w=h("div","wrap");
 const back=h("a","chip",T("back","\u2190 All businesses"));back.href="#/";
@@ -454,11 +485,11 @@ const h1=h("div","sh");h1.append(h("h2","",T("svcTitle","Services")),h("p","",T(
 (b.services&&b.services.length?b.services:["Ask about our products and services"]).forEach(v=>{const e=h("div","svc");e.append(h("b","",v),ext(wa(b,"Hello "+b.name+", I need: "+v),"Request "+v+" on WhatsApp","wa",T("request","Request"),"btn g"));w1.append(e)});s1.append(w1);
 const s2=h("section","sheet alt");s2.id="gal";const w2=h("div","wrap"),h2=h("div","sh");h2.append(h("h2","",T("saleTitle","On sale")),h("p","",T("saleSub","Tap Add to list on anything you want, then purchase on WhatsApp. Sold items stay visible with a SOLD stamp.")));w2.append(h2);
 const cc=cartCard(b);if(cc)w2.append(cc);
-const g=h("div","gal"),inl=(cart[b.id]||[]);b.items.filter(i=>i.kind!=="service").sort((a,c)=>a.sold-c.sold||c.t-a.t).forEach(i=>{const c=h("article","card it"+(i.sold?" sold":"")),p=h("div","pic"),im=h("img");im.src=safeImg(i.img)||ph(i.n);im.alt=i.n+(i.sold?" (sold)":"");im.loading="lazy";im.decoding="async";p.append(im);
+const g=h("div","gal"),inl=(cart[b.id]||[]);b.items.filter(i=>i.kind!=="service").sort((a,c)=>a.sold-c.sold||c.t-a.t).forEach(i=>{const c=h("article","card it"+(i.sold?" sold":"")),p=h("div","pic");p.append(slider(i.n+(i.sold?" (sold)":""),itemPics(i),()=>inspect(b,i)));
 if(i.sold){const m=h("div","mark");m.append(h("span","",T("soldStamp","SOLD")));p.append(m)}
-const n=h("div","inf");n.append(h("h4","",i.n),h("span","pr",kes(i.p)));
+const n=h("div","inf");n.append(h("h4","",i.n),h("span","pr",kes(i.p)));if(i.det)n.append(h("p","dsc",i.det));
 if(i.sold)n.append(h("span","chip",T("gone","No longer available")));else{if(i.q>1)n.append(h("span","chip",i.q+" available"));const c=inl.filter(z=>z===i.id).length,x=h("button","btn "+(c?"g":"p"),c?T("added","Added \u2713")+" \u00d7"+c+" (+1)":T("addList","Add to list"));x.disabled=c>=i.q;x.addEventListener("click",()=>cartAdd(b,i,1));n.append(x)}
-c.append(p);const pg=(i.gal||[]).map(safeImg).filter(Boolean);if(pg.length>1){const t=h("div","thumbs");pg.forEach((u,k)=>{const bt=h("button","th2"),ti=h("img");ti.src=u;ti.alt=i.n+" photo "+(k+1);ti.loading="lazy";bt.append(ti);bt.setAttribute("aria-label","Show photo "+(k+1));bt.addEventListener("click",()=>{im.src=u});t.append(bt)});c.append(t)}c.append(n);g.append(c)});w2.append(g);s2.append(w2);
+const vd=h("button","btn g","View details");vd.type="button";vd.addEventListener("click",()=>inspect(b,i));n.append(vd);c.append(p,n);g.append(c)});w2.append(g);s2.append(w2);
 const sv=b.items.filter(i=>i.kind==="service"),np=b.items.length-sv.length;let s3=null;
 if(sv.length){s3=h("section","sheet"+(np?"":" alt"));s3.id="appt";const w3=h("div","wrap"),h3=h("div","sh"),g3=h("div","gal");h3.append(h("h2","",T("apptTitle","Services & appointments")),h("p","",T("apptSub","Browse our past work, then book a time on WhatsApp.")));sv.forEach(x=>g3.append(svcCard(b,x)));w3.append(h3,g3);s3.append(w3)}
 f.append(s,s1);if(np||!sv.length)f.append(s2);if(s3)f.append(s3);return f}
@@ -471,11 +502,11 @@ const fh=h("div","sh sec");fh.append(h("h2","","Follow CYBERJAY"),h("p","","Find
 const bump=()=>{clearTimeout(idle);if(me)idle=setTimeout(async()=>{await sb.auth.signOut();me=null;paint()},6e5)};
 addEventListener("click",bump);addEventListener("keydown",bump);
 function form(fs,btn,fn){const c=h("div","card frm"),m=h("p","err"),ins={};m.setAttribute("role","status");
-fs.forEach(([k,l,t,v,op])=>{const lb=h("label","",l),i=h(t==="select"?"select":"input");
-if(t==="select")(op||[]).forEach(x=>{const o=h("option","",x[1]);o.value=x[0];i.append(o)});else i.type=t==="files"?"file":(t||"text");if(t==="files")i.multiple=true;
+fs.forEach(([k,l,t,v,op])=>{const lb=h("label","",l),i=h(t==="select"?"select":t==="area"?"textarea":"input");
+if(t==="select")(op||[]).forEach(x=>{const o=h("option","",x[1]);o.value=x[0];i.append(o)});else if(t!=="area")i.type=t==="files"?"file":(t||"text");if(t==="files")i.multiple=true;
 i.autocomplete=t==="password"?(k==="p"?"current-password":"new-password"):(k==="e"?"username":k==="email"?"email":"off");
 i.name="f"+k+Math.random().toString(36).slice(2,6);i.setAttribute("data-lpignore","true");i.setAttribute("data-1p-ignore","true");
-if(t==="number"){i.min=0;i.step=1}else if(t==="file"||t==="files")i.accept="image/jpeg,image/png,image/webp";else if(t!=="select")i.maxLength=200;
+if(t==="number"){i.min=0;i.step=1}else if(t==="file"||t==="files")i.accept="image/jpeg,image/png,image/webp";else if(t==="area"){i.maxLength=600;i.rows=4}else if(t!=="select")i.maxLength=200;
 if(v!=null&&t!=="file"&&t!=="password")i.value=v;lb.append(i);c.append(lb);ins[k]=i});
 const b=h("button","btn p",btn);b.addEventListener("click",async()=>{const o={};for(const k in ins){const i=ins[k];o[k]=i.type==="file"?(i.multiple?[...i.files]:i.files[0]):i.type==="password"?i.value:i.value.trim()}b.disabled=true;b.classList.add("busy");busy(1,"save");try{await fn(o,m)}catch(e){m.textContent=e.message}busy(-1,"save");b.disabled=false;b.classList.remove("busy")});
 c.addEventListener("keydown",e=>{if(e.key==="Enter"&&e.target.type!=="file")b.click()});c.append(b,m);return c}
@@ -529,9 +560,9 @@ function stockV(b){const s=stats(b),w=h("div"),g=h("div","cols sm");
 g.append(st("Units in stock",s.units),st("Units sold",s.usold),st("Stock value",kes(s.val)),st("Cash in (sold)",kes(s.rev)),st("Avg days to sell",s.avg+" d"),st("Slow movers (30d+)",s.slow));
 const pv=h("a","btn g","Preview storefront");pv.href="#/b/"+b.id;w.append(g,h("h3","sec","In stock (longest-waiting first)"));
 s.i.sort((a,c)=>a.t-c.t).forEach(x=>w.append(row(b,x)));w.append(h("h3","sec","Sold out (restock by raising Qty)"));s.s.sort((a,c)=>c.s-a.s).forEach(x=>w.append(row(b,x)));const sv=b.items.filter(x=>x.kind==="service");if(sv.length){w.append(h("h3","sec","Services"));sv.forEach(x=>w.append(row(b,x)))}w.append(h("p"),pv);return w}
-function addForm(b){return form([["n","Item name"],["p","Price (KES)","number"],["q","How many do you have?","number","1"],["f","Photos (up to 3)","files"]],"Add to stock",async o=>{nm(o.n,"Name",2,80);const p=price(o.p);const files=o.f||[];if(files.length>3)throw new Error("You can add up to 3 photos per item");const q=Math.round(Number(o.q));if(!(q>=1&&q<=1e5))throw new Error("Quantity must be 1 or more");const gal=[];
+function addForm(b){return form([["n","Item name"],["p","Price (KES)","number"],["q","How many do you have?","number","1"],["t","Description (what it is, size, colour, condition)","area"],["f","Photos (up to 4, swipe-able on the item)","files"]],"Add to stock",async o=>{nm(o.n,"Name",2,80);const p=price(o.p);const files=o.f||[];if(files.length>4)throw new Error("You can add up to 4 photos per item");if(o.t.length>600)throw new Error("Description is too long (600 characters max)");const q=Math.round(Number(o.q));if(!(q>=1&&q<=1e5))throw new Error("Quantity must be 1 or more");const gal=[];
 try{for(const f of files){const path=b.uid+"/"+crypto.randomUUID()+".jpg";await db(sb.storage.from("item-photos").upload(path,await rz(f),{contentType:"image/jpeg"}));gal.push(path)}
-await db(sb.from("items").insert({business_id:b.uid,name:o.n,price:p,qty:q,img:gal[0]||"",gallery:gal}))}catch(e){if(gal.length)sb.storage.from("item-photos").remove(gal);throw e}
+await db(sb.from("items").insert({business_id:b.uid,name:o.n,price:p,qty:q,details:o.t,img:gal[0]||"",gallery:gal}))}catch(e){if(gal.length)sb.storage.from("item-photos").remove(gal);throw e}
 await refresh();flash="Item added.";tab="stock";paint()})}
 function profV(b){const w=h("div");w.append(profForm(b),h("h3","sec","Location (so customers can find you by county, town and estate)"),locForm(b));return w}
 function locForm(b){const co=[["","Choose county"],...Object.keys(KE).map(c=>[c,c])],twn=c=>[["","Choose sub-county / town"],...(KE[c]||[]).map(t=>[t,t])],inList=b.sub&&(KE[b.county]||[]).includes(b.sub);
@@ -567,7 +598,7 @@ const planInfo=b=>{const exp=!!(b.until&&b.until<today()),d=b.until&&!exp?Math.m
 if(b.planRaw!=="free"&&!exp&&b.trial)return{d,trial:1,t:"Premium / New member (free trial, "+d+" day"+(d===1?"":"s")+" left)"};
 if(b.planRaw!=="free"&&!exp)return{d,t:PL[b.planRaw].n+(b.until?" until "+b.until+" ("+d+" day"+(d===1?"":"s")+" left)":" (no expiry)")};
 if(b.planRaw!=="free")return{d:null,ended:1,t:"Free ("+(b.trial?"trial":"plan")+" ended "+b.until+")"};return{d:null,t:"Free"}};
-const num=(k,d)=>{const n=Number(T(k,String(d)));return Number.isFinite(n)&&n>=0?n:d},CFG={launch:T("launchDate",""),fDays:num("foundingDays",10),fPct:num("foundingPct",35),nPct:num("newPct",20),oDays:num("offerDays",30),pPrice:num("premiumPrice",1500),sPrice:num("standardPrice",500)};
+const num=(k,d)=>{const n=Number(T(k,String(d)));return Number.isFinite(n)&&n>=0?n:d},CFG={launch:T("launchDate",""),fDays:num("foundingDays",10),fPct:num("foundingPct",35),nPct:num("newPct",20),oDays:num("offerDays",30),pPrice:num("premiumPrice",699),sPrice:num("standardPrice",299)};
 const offerInfo=b=>{if(!b.trialUntil)return{state:"none"};const lau=/^\d{4}-\d{2}-\d{2}$/.test(CFG.launch)?CFG.launch:"",founding=!!lau&&!!b.joined&&b.joined<addDays(lau,CFG.fDays),pct=founding?CFG.fPct:CFG.nPct,end=addDays(b.trialUntil,CFG.oDays),price=Math.round(CFG.pPrice*(1-pct/100));
 return{state:b.offerUsed?"used":(today()>end?"expired":"active"),founding,pct,end,price,kind:founding?"Founding member":"New member"}};
 const offerNote=b=>{const o=offerInfo(b);return o.state==="active"?h("p","lead",o.kind+" offer: "+o.pct+"% off Premium. Pay KES "+o.price+" instead of KES "+CFG.pPrice+" for your first Premium month. Offer valid until "+o.end+"."):h("p")};
@@ -620,15 +651,15 @@ c.append(h("h4","",b.name),h("p","mut",b.tag+" \u00b7 "+b.loc+" \u00b7 since "+b
 ok.addEventListener("click",async()=>{try{await db(sb.from("businesses").update({approved:true}).eq("id",b.uid));await refresh();flash=b.name+" approved. It is now visible to customers and has a "+14+"-day free Premium trial."}catch(e){flash=e.message}paint()});
 no.addEventListener("click",async()=>{if(!confirm("Decline and delete "+b.name+"? This also removes the applicant's login."))return;const q=await sb.functions.invoke("create-business",{body:{action:"delete",slug:b.id}});if(q.error){let m="Could not decline.";try{const e=await q.error.context.json();if(e&&e.error)m=e.error}catch(z){}flash=m}else{await refresh();flash=b.name+" declined and removed."}paint()});
 r.append(ok,no);c.append(r);w.append(c)});return w}
-function addService(b){return form([["n","Service name (e.g. Network setup)"],["p","Starting price (KES)","number"],["d","Duration (e.g. 1 hour)"],["t","Short description"],["g","Portfolio photos (up to 6)","files"]],"Add service",async o=>{
-nm(o.n,"Name",2,80);const p=price(o.p);nm(o.d,"Duration",1,40);if(o.t.length>200)throw new Error("Description is too long");const files=(o.g||[]).slice(0,6),gal=[];
+function addService(b){return form([["n","Service name (e.g. Network setup)"],["p","Starting price (KES)","number"],["d","Duration (e.g. 1 hour)"],["t","Description (what is included)","area"],["g","Portfolio photos (up to 4)","files"]],"Add service",async o=>{
+nm(o.n,"Name",2,80);const p=price(o.p);nm(o.d,"Duration",1,40);if(o.t.length>600)throw new Error("Description is too long (600 characters max)");const files=o.g||[];if(files.length>4)throw new Error("You can add up to 4 photos per service");const gal=[];
 try{for(const f of files){const path=b.uid+"/svc-"+crypto.randomUUID()+".jpg";await db(sb.storage.from("item-photos").upload(path,await rz(f,1000),{contentType:"image/jpeg"}));gal.push(path)}
 await db(sb.from("items").insert({business_id:b.uid,name:o.n,price:p,qty:1,kind:"service",duration:o.d,details:o.t,gallery:gal,img:gal[0]||""}))}catch(e){if(gal.length)sb.storage.from("item-photos").remove(gal);throw e}
 await refresh();flash="Service added.";tab="stock";paint()})}
 function addV(b){const lim=PL[b.plan].lim,used=b.items.filter(x=>!x.sold).length,w=h("div");w.append(h("p","mut",PL[b.plan].n+" plan: "+used+" of "+(lim===Infinity?"unlimited":lim)+" listings (products and services) in use."));const tl=h("a","chip","By listing you agree to the Terms & Conditions");tl.href="#/terms";tl.target="_blank";tl.rel="noopener";w.append(tl);
 if(used>=lim)w.append(h("p","err","You have reached your plan limit. Upgrade in the Plan tab to add more products."));else{const sg=h("div","row");[["product","Add a product"],["service","Add a service"]].forEach(([k,l])=>{const x=h("button","btn "+(addKind===k?"p":"g"),l);x.addEventListener("click",()=>{addKind=k;paint()});sg.append(x)});w.append(sg,addKind==="service"?addService(b):addForm(b))}return w}
 function planV(b){const w=h("div"),cur=b.plan,pi=planInfo(b),of=offerInfo(b),pend=PR.find(x=>x.business_id===b.uid&&x.status==="requested"),f=h("div","cols");
-const FE={free:["Up to 3 products","Direct WhatsApp access"],standard:["Up to 15 products","Use your admin panel","WhatsApp and Instagram access","Eligible for the Verified Seller badge (ID check)"],premium:["Homepage banner spot","Unlimited products","Priority search rank","Eligible for the Verified Seller badge (ID check)"]},DP={free:"Free",standard:"KES 500 / month",premium:"KES 1,500 / month"};
+const FE={free:["Up to 3 products","Direct WhatsApp access"],standard:["Up to 15 products","Use your admin panel","WhatsApp and Instagram access","Eligible for the Verified Seller badge (ID check)"],premium:["Homepage banner spot","Unlimited products","Priority search rank","Eligible for the Verified Seller badge (ID check)"]},DP={free:"Free",standard:"KES 299 / month",premium:"KES 699 / month"};
 ["free","standard","premium"].forEach(k=>{const c=h("div","card"),ul=h("ul","note");FE[k].forEach(x=>ul.append(h("li","",x)));
 c.append(h("h3","",PL[k].n+(k===cur?" \u2713 (your plan)":"")),h("p","pr",k==="premium"&&of.state==="active"?T("pricePremium",DP[k])+"  \u2192  KES "+of.price+" first month ("+of.pct+"% off)":T("price"+k[0].toUpperCase()+k.slice(1),DP[k])),ul);
 if(k!=="free"&&(RK[k]>RK[cur]||b.trial||(pi.d!==null&&pi.d<=5))){const sent=pend&&pend.plan===k,bt=h("button","btn "+(sent?"g":"p"),sent?"Request sent":"Request "+PL[k].n);bt.disabled=!!pend;bt.addEventListener("click",async()=>{try{await db(sb.from("plan_requests").insert({business_id:b.uid,plan:k}));await loadX();flash="Request sent. "+T("payNote","Pay the holding admin, who will then activate your plan.")}catch(e){flash=e.message}paint()});c.append(bt)}f.append(c)});
@@ -669,14 +700,14 @@ ap.addEventListener("click",()=>done(true));rj.addEventListener("click",()=>done
 r.append(show("View ID front",v.front),show("View ID back",v.back),ap,rj);c.append(r,box);w.append(c)});return w}
 function adV(b){const w=h("div"),on=adOn(b),pend=AR.find(x=>x.business_id===b.uid&&x.status==="requested");
 w.append(h("p","lead",on?"Your sponsored ad is live until "+b.adUntil+" ("+adLeft(b)+" day"+(adLeft(b)===1?"":"s")+" left).":"You have no active sponsored ad."));
-w.append(h("p","mut","A sponsored ad slides across the top of the home page in a glass strip and links to your business page. Prices: "+T("adWeek","KES 300 / week")+" or "+T("adMonth","KES 1,000 / month")+". "+T("payNote","Pay the holding admin, who will then activate it.")));
-const f=h("div","row");[["week","1 week \u00b7 "+T("adWeek","KES 300 / week")],["month","1 month \u00b7 "+T("adMonth","KES 1,000 / month")]].forEach(([k,l])=>{const sent=pend&&pend.period===k,x=h("button","btn "+(sent?"g":"p"),sent?"Request sent":"Request "+l);x.disabled=!!pend;x.addEventListener("click",async()=>{try{await db(sb.from("ad_requests").insert({business_id:b.uid,period:k}));await loadX();flash="Ad request sent. "+T("payNote","Pay the holding admin, who will then activate it.")}catch(e){flash=e.message}paint()});f.append(x)});w.append(f);
+w.append(h("p","mut","A sponsored ad slides across the top of the home page in a glass strip and links to your business page. Prices: "+T("adWeek","KES 200 / week")+" or "+T("adMonth","KES 600 / month")+". "+T("payNote","Pay the holding admin, who will then activate it.")));
+const f=h("div","row");[["week","1 week \u00b7 "+T("adWeek","KES 200 / week")],["month","1 month \u00b7 "+T("adMonth","KES 600 / month")]].forEach(([k,l])=>{const sent=pend&&pend.period===k,x=h("button","btn "+(sent?"g":"p"),sent?"Request sent":"Request "+l);x.disabled=!!pend;x.addEventListener("click",async()=>{try{await db(sb.from("ad_requests").insert({business_id:b.uid,period:k}));await loadX();flash="Ad request sent. "+T("payNote","Pay the holding admin, who will then activate it.")}catch(e){flash=e.message}paint()});f.append(x)});w.append(f);
 const hw=T("holdingWa","");if(pend&&/^\d{10,15}$/.test(hw))w.append(h("p"),ext("https://wa.me/"+hw+"?text="+encodeURIComponent("Hello CYBERJAY Holdings, I am "+b.name+" and I requested a sponsored ad ("+pend.period+")."),"Message the holding admin on WhatsApp","wa"," Message the holding admin","btn p"));
 w.append(h("h3","sec","Your ad message"),form([["t","Short ad line (max 80 characters)","text",b.adText]],"Save ad message",async o=>{nm(o.t,"Ad message",0,80);await db(sb.from("businesses").update({ad_text:o.t}).eq("id",b.uid));await refresh();flash="Ad message saved.";paint()}));return w}
 function adsV(){const w=h("div"),L=AR.filter(x=>x.status==="requested");w.append(h("h3","sec","Ad requests"));if(!L.length)w.append(h("p","mut","No ad requests waiting."));
 const base=b=>adOn(b)?b.adUntil:addDays(today(),-1);
 L.forEach(q=>{const b=S.biz.find(x=>x.uid===q.business_id);if(!b)return;const n=q.period==="month"?30:7,c=h("div","card rowc"),r=h("div","row"),ok=h("button","btn p","Agree and activate ("+n+" days)"),no=h("button","btn g","Decline");
-c.append(h("h4","",b.name),h("p","mut","Requested "+(q.period==="month"?"1 month ("+T("adMonth","KES 1,000 / month")+")":"1 week ("+T("adWeek","KES 300 / week")+")")+". Confirm you received the payment first."));
+c.append(h("h4","",b.name),h("p","mut","Requested "+(q.period==="month"?"1 month ("+T("adMonth","KES 600 / month")+")":"1 week ("+T("adWeek","KES 200 / week")+")")+". Confirm you received the payment first."));
 ok.addEventListener("click",async()=>{try{await db(sb.from("businesses").update({ad_until:addDays(base(b),n)}).eq("id",b.uid));await db(sb.from("ad_requests").update({status:"active",decided_at:new Date().toISOString()}).eq("id",q.id));await Promise.all([refresh(),loadX()]);flash=b.name+" ad is live for "+n+" more days."}catch(e){flash=e.message}paint()});
 no.addEventListener("click",async()=>{try{await db(sb.from("ad_requests").update({status:"declined",decided_at:new Date().toISOString()}).eq("id",q.id));await loadX();flash="Ad request declined."}catch(e){flash=e.message}paint()});
 r.append(ok,no);c.append(r);w.append(c)});
