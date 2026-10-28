@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-kKlWPFNUCrXkkMQeEubvhfP1cf3aJlwtlMUpOOZuR/Q=' https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js; style-src 'sha256-rI9KqV+Rv6poGM0bKOIlNYD0+yHvP2Xx9lzX56mk8FQ=' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https://hzfkjqmhpalmybaqsdql.supabase.co; connect-src https://hzfkjqmhpalmybaqsdql.supabase.co wss://hzfkjqmhpalmybaqsdql.supabase.co; form-action 'none'; base-uri 'none'; object-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-gLX5sy4FKVlNk6PYvd7o7awe5t2hFeK1BcHOCVk1GNo=' https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js; style-src 'sha256-rI9KqV+Rv6poGM0bKOIlNYD0+yHvP2Xx9lzX56mk8FQ=' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https://hzfkjqmhpalmybaqsdql.supabase.co; connect-src https://hzfkjqmhpalmybaqsdql.supabase.co wss://hzfkjqmhpalmybaqsdql.supabase.co; form-action 'none'; base-uri 'none'; object-src 'none'">
 <meta name="referrer" content="no-referrer">
 <meta name="theme-color" content="#0a0a0b">
 <title>CYBERJAY Holdings | Businesses &amp; Marketplace</title>
@@ -451,7 +451,7 @@ const tot=u.reduce((a,x)=>a+x.p*n(x),0);c.append(h("p","pr",T("total","Total: ")
 const msg="Hello "+b.name+", I would like to buy:\n"+u.map((x,i)=>(i+1)+". "+n(x)+" x "+x.n+" - "+kes(x.p*n(x))).join("\n")+"\nTotal: "+kes(tot)+"\nPlease advise on transport and payment.";
 c.append(ext(wa(b,msg),"Purchase on WhatsApp","wa",T("purchase"," Purchase on WhatsApp"),"btn p"));return c}
 const itemPics=i=>{const g=(i.gal||[]).map(safeImg).filter(Boolean).slice(0,4);if(g.length)return g;const m=safeImg(i.img);return[m||ph(i.n)]};
-function slider(alt,urls,onTap,big){const box=h("div","sld"+(big?" big":"")),tr=h("div","sldt"),n=urls.length;tr.setAttribute("role","group");tr.setAttribute("aria-label",alt+(n>1?", "+n+" photos. Swipe to see more":""));if(n>1)tr.tabIndex=0;
+function photoSlider(alt,urls,onTap,big){const box=h("div","sld"+(big?" big":"")),tr=h("div","sldt"),n=urls.length;tr.setAttribute("role","group");tr.setAttribute("aria-label",alt+(n>1?", "+n+" photos. Swipe to see more":""));if(n>1)tr.tabIndex=0;
 urls.forEach((u,k)=>{const im=h("img");im.src=u;im.alt=alt+(n>1?" photo "+(k+1)+" of "+n:"");im.loading=k?"lazy":"eager";im.decoding="async";im.draggable=false;tr.append(im)});
 if(onTap)tr.addEventListener("click",onTap);box.append(tr);
 if(n>1){const dots=h("div","dots"),ds=urls.map(()=>h("i"));ds.forEach(d=>dots.append(d));
@@ -469,9 +469,9 @@ if(svc)inf.append(h("span","chip","\u23F1 "+(x.dur||"Ask for duration")));else i
 inf.append(h("p","full",x.det||"No description added yet."));
 if(svc)inf.append(ext(wa(b,"Hello "+b.name+", I would like to book an appointment for: "+x.n+" (from "+kes(x.p)+", "+(x.dur||"duration to confirm")+"). Please share your available dates and times."),"Book an appointment for "+x.n+" on WhatsApp","wa",T("book"," Book Appointment"),"btn p"));
 else if(!x.sold){const c=(cart[b.id]||[]).filter(z=>z===x.id).length,ad=h("button","btn "+(c?"g":"p"),c?T("added","Added \u2713")+" \u00d7"+c+" (+1)":T("addList","Add to list"));ad.type="button";ad.disabled=c>=x.q;ad.addEventListener("click",()=>{closeInspect();cartAdd(b,x,1)});inf.append(ad)}
-d.append(slider(x.n,itemPics(x),null,true),inf,cl);o.append(d);document.body.append(o);ovl=o;document.body.style.overflow="hidden";document.addEventListener("keydown",ovKey);cl.focus()}
+d.append(photoSlider(x.n,itemPics(x),null,true),inf,cl);o.append(d);document.body.append(o);ovl=o;document.body.style.overflow="hidden";document.addEventListener("keydown",ovKey);cl.focus()}
 addEventListener("hashchange",closeInspect);
-function svcCard(b,x){const c=h("article","card it svc"),p=h("div","pic");p.append(slider(x.n,itemPics(x),()=>inspect(b,x)));c.append(p);
+function svcCard(b,x){const c=h("article","card it svc"),p=h("div","pic");p.append(photoSlider(x.n,itemPics(x),()=>inspect(b,x)));c.append(p);
 const n=h("div","inf");n.append(h("h4","",x.n),h("span","pr","From "+kes(x.p)),h("span","chip","\u23F1 "+(x.dur||"Ask for duration")));if(x.det)n.append(h("p","dsc",x.det));const vd=h("button","btn g","View details");vd.type="button";vd.addEventListener("click",()=>inspect(b,x));n.append(vd);
 n.append(ext(wa(b,"Hello "+b.name+", I would like to book an appointment for: "+x.n+" (from "+kes(x.p)+", "+(x.dur||"duration to confirm")+"). Please share your available dates and times."),"Book an appointment for "+x.n+" on WhatsApp","wa",T("book"," Book Appointment"),"btn p"));c.append(n);return c}
 function biz(b){const f=document.createDocumentFragment(),s=h("section","hero"),w=h("div","wrap");
@@ -485,7 +485,7 @@ const h1=h("div","sh");h1.append(h("h2","",T("svcTitle","Services")),h("p","",T(
 (b.services&&b.services.length?b.services:["Ask about our products and services"]).forEach(v=>{const e=h("div","svc");e.append(h("b","",v),ext(wa(b,"Hello "+b.name+", I need: "+v),"Request "+v+" on WhatsApp","wa",T("request","Request"),"btn g"));w1.append(e)});s1.append(w1);
 const s2=h("section","sheet alt");s2.id="gal";const w2=h("div","wrap"),h2=h("div","sh");h2.append(h("h2","",T("saleTitle","On sale")),h("p","",T("saleSub","Tap Add to list on anything you want, then purchase on WhatsApp. Sold items stay visible with a SOLD stamp.")));w2.append(h2);
 const cc=cartCard(b);if(cc)w2.append(cc);
-const g=h("div","gal"),inl=(cart[b.id]||[]);b.items.filter(i=>i.kind!=="service").sort((a,c)=>a.sold-c.sold||c.t-a.t).forEach(i=>{const c=h("article","card it"+(i.sold?" sold":"")),p=h("div","pic");p.append(slider(i.n+(i.sold?" (sold)":""),itemPics(i),()=>inspect(b,i)));
+const g=h("div","gal"),inl=(cart[b.id]||[]);b.items.filter(i=>i.kind!=="service").sort((a,c)=>a.sold-c.sold||c.t-a.t).forEach(i=>{const c=h("article","card it"+(i.sold?" sold":"")),p=h("div","pic");p.append(photoSlider(i.n+(i.sold?" (sold)":""),itemPics(i),()=>inspect(b,i)));
 if(i.sold){const m=h("div","mark");m.append(h("span","",T("soldStamp","SOLD")));p.append(m)}
 const n=h("div","inf");n.append(h("h4","",i.n),h("span","pr",kes(i.p)));if(i.det)n.append(h("p","dsc",i.det));
 if(i.sold)n.append(h("span","chip",T("gone","No longer available")));else{if(i.q>1)n.append(h("span","chip",i.q+" available"));const c=inl.filter(z=>z===i.id).length,x=h("button","btn "+(c?"g":"p"),c?T("added","Added \u2713")+" \u00d7"+c+" (+1)":T("addList","Add to list"));x.disabled=c>=i.q;x.addEventListener("click",()=>cartAdd(b,i,1));n.append(x)}
