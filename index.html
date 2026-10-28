@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-OhOlDfQ8GNHhgdB2L6RpTrcYUWTbvbd44JzhA1G1P1k=' https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js; style-src 'sha256-QE7PunOPnrncxJx5My5SwlERxZERUibXEx4DztNxVQ4=' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https://hzfkjqmhpalmybaqsdql.supabase.co; connect-src https://hzfkjqmhpalmybaqsdql.supabase.co wss://hzfkjqmhpalmybaqsdql.supabase.co; form-action 'none'; base-uri 'none'; object-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-3dsZR3sqkuAl396IG/jntTErzqEoadbklq7wTV4nK2g=' https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js; style-src 'sha256-QE7PunOPnrncxJx5My5SwlERxZERUibXEx4DztNxVQ4=' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https://hzfkjqmhpalmybaqsdql.supabase.co; connect-src https://hzfkjqmhpalmybaqsdql.supabase.co wss://hzfkjqmhpalmybaqsdql.supabase.co; form-action 'none'; base-uri 'none'; object-src 'none'">
 <meta name="referrer" content="no-referrer">
 <meta name="theme-color" content="#0a0a0b">
 <title>CYBERJAY Holdings | Businesses &amp; Marketplace</title>
@@ -487,17 +487,24 @@ const emailOk=v=>/^[^\s@'"]{1,64}@[^\s@'"]{1,190}\.[^\s@'"]{2,}$/.test(v);
 async function db(p){busy(1,"save");try{const r=await p;if(r.error)throw new Error("Not saved: "+String(r.error.message).slice(0,140));return r}finally{busy(-1,"save")}}
 async function whoami(){let r=await sb.from("profiles").select("role,business_id,username").maybeSingle(),hasU=true;if(r.error){hasU=false;r=await sb.from("profiles").select("role,business_id").maybeSingle()}
 if(r.error||!r.data)return null;const b=S.biz.find(x=>x.uid===r.data.business_id),{data:s}=await sb.auth.getSession(),m=!!(s&&s.session&&s.session.user.user_metadata&&s.session.user.user_metadata.must_change),un=String(r.data.username||"").toLowerCase();me={role:r.data.role,biz:b?b.id:null,must:m,uname:un,needUser:hasU&&r.data.role==="holding"&&!un};tab=m?"pw":me.role==="holding"?"biz":"stock";return me}
-async function doLogin(e,p,u){e=String(e||"").trim().toLowerCase();u=String(u||"").trim().toLowerCase();if(!emailOk(e)||!p)throw new Error("Enter your email and password.");if(u&&!unameOk(u))throw new Error("Wrong email, username or password.");
-busy(1,"login");try{const r=await sb.auth.signInWithPassword({email:authEmail(e,u),password:p});if(r.error)throw new Error("Wrong email, username or password.");
+async function doLogin(e,p,u){p=p||"";
+if(gateE){u=String(u||"").trim().toLowerCase();if(!unameOk(u)||!p)throw new Error("Wrong username or password.");
+busy(1,"login");try{const r=await sb.auth.signInWithPassword({email:authEmail(gateE,u),password:p});if(r.error)throw new Error("Wrong username or password.");
+if(!await whoami()||me.role!=="holding"||me.uname!==u){await sb.auth.signOut();me=null;throw new Error("Wrong username or password.")}
+gateE="";await loadX();bellOpen=notes().length>0;bump();paint()}finally{busy(-1,"login")}return}
+e=String(e||"").trim().toLowerCase();if(!emailOk(e)||!p)throw new Error("Enter your email and password.");
+busy(1,"login");try{const r=await sb.auth.signInWithPassword({email:e,password:p});if(r.error)throw new Error("Wrong email or password.");
+const am=(r.data&&r.data.user&&r.data.user.app_metadata)||{};
+if(am.gate){await sb.auth.signOut();me=null;gateE=e;paint();return}
 if(!await whoami()){await sb.auth.signOut();throw new Error("This account is not linked to a business yet. Ask the holding admin.")}
-if(me.role==="holding"&&me.uname&&me.uname!==u){await sb.auth.signOut();me=null;throw new Error("Wrong email, username or password.")}
+if(me.role==="holding"&&me.uname){await sb.auth.signOut();me=null;throw new Error("Wrong email or password.")}
 await setMfa();if(!me.mfa){await loadX();bellOpen=notes().length>0}bump();paint()}finally{busy(-1,"login")}}
 async function restore(){if(!sb)return;const {data}=await sb.auth.getSession();if(data&&data.session){if(await whoami()){await setMfa();if(!me.mfa)await loadX();bump()}else await sb.auth.signOut()}}
 function chamber(){const f=document.createDocumentFragment(),s=h("section","hero"),w=h("div","wrap");w.append(h("p","eyebrow",T("chEyebrow","Restricted")),h("h1","",T("chTitle","Executive Chamber")),h("p","lead",T("chLead","Business admins manage their own stock here. The holding admin registers businesses.")));s.append(w);
 const sh=h("section","sheet"),sw=h("div","wrap");sw.id="cw";sw.append(me?room():login());sh.append(sw);f.append(s,sh);return f}
 function paint(){const w=$("#cw");if(w)w.replaceChildren(me?room():login())}
 const waNum=()=>{for(const k of ["holdingWa","socialWa"]){const v=String(T(k,"")).trim(),m=v.match(/wa\.me\/(\d{10,15})/)||v.match(/^\+?(\d{10,15})$/);if(m)return m[1]}return""};
-function login(){const g=h("div","gate");g.append(h("h3","","Admin login"));if(rmsg){g.append(h("p","err",rmsg));rmsg=""}g.append(h("p","mut","Holding admins: also type your username. Business owners can leave the username empty."),form([["e","Email"],["u","Username (holding admins only)"],["p","Password","password"]],"Log in",o=>doLogin(o.e,o.p,o.u)));const fp=h("button","btn g","Forgot password?");fp.addEventListener("click",()=>{const bk=h("button","btn g","\u2190 Back to login");bk.addEventListener("click",()=>g.replaceWith(login()));const hw=waNum(),emailFirst=T("resetMode","whatsapp")==="email";
+function login(){const g=h("div","gate");g.append(h("h3","","Admin login"));if(rmsg){g.append(h("p","err",rmsg));rmsg=""}if(gateE){g.append(h("p","mut","Step 2 of 2: enter your username and your own personal password."),form([["u","Username"],["p","Personal password","password"]],"Log in",o=>doLogin("",o.p,o.u)));const gb=h("button","btn g","\u2190 Use a different email");gb.addEventListener("click",()=>{gateE="";paint()});g.append(gb)}else g.append(form([["e","Email"],["p","Password","password"]],"Log in",o=>doLogin(o.e,o.p)));const fp=h("button","btn g","Forgot password?");fp.addEventListener("click",()=>{const bk=h("button","btn g","\u2190 Back to login");bk.addEventListener("click",()=>g.replaceWith(login()));const hw=waNum(),emailFirst=T("resetMode","whatsapp")==="email";
 const wb=hw?ext("https://wa.me/"+hw+"?text="+encodeURIComponent("Hello CYBERJAY Holdings, I forgot my admin password and need a reset.\nBusiness name: \nOwner name: \nLogin email: "),"Contact admin on WhatsApp","wa","Contact admin on WhatsApp","btn p"):null;
 const ef=form([["email","Your account email","email"],["u","Username (holding admins only)"]],"Email me a reset link",(o,m)=>doReset(o.email,m,o.u));
 const wpart=[h("p","mut","For your safety, the CYBERJAY admin will first confirm on WhatsApp that it is really you, then give you a temporary password. After you log in with it, choose your own new password."),wb],epart=[h("h3","sec","Reset link by email"),h("p","mut","Enter the email on your account and we will send you a link to choose a new password."),ef];
@@ -541,17 +548,18 @@ function pwV(){return form([["a","New password (10+ characters)","password"],["c
 await db(sb.auth.updateUser({password:o.a,data:{must_change:false}}));me.must=false;flash="Password changed.";tab=me.role==="holding"?"biz":"stock";paint()})}
 async function setMfa(){me.mfa=""}
 const authEmail=(e,u)=>{e=String(e||"").trim().toLowerCase();u=String(u||"").trim().toLowerCase();if(!u)return e;const p=e.split("@");return p[0].split("+")[0]+"+"+u+"@"+p[1]};
+let gateE="";
 const unameOk=u=>/^[a-z0-9._-]{3,24}$/.test(u);
 async function fnErr(q,d){let m=d;try{const e=await q.error.context.json();if(e&&e.error)m=e.error}catch(z){}return m}
-function unameV(){const w=h("div");w.append(h("p","mut","Holding admins sign in with their email, a username and a password. Choose your username now (3-24 letters, numbers, . _ or -). After saving you will log in again."),form([["u","Your username"]],"Save username",async o=>{const u=o.u.toLowerCase();if(!unameOk(u))throw new Error("Username: 3-24 letters, numbers, . _ or -");
-const q=await sb.functions.invoke("holding-admin",{body:{action:"set-username",username:u}});if(q.error)throw new Error(await fnErr(q,"Could not save the username. Try again."));
-await sb.auth.signOut();me=null;HX=[];MS=[];rmsg="Username saved. From now on log in with your email, the username "+u+" and your password.";paint()}));return w}
-function adminsV(){const w=h("div"),box=h("div");w.append(h("p","mut","Holding admins sign in with the same email, their own username and their own password. Only the main admin can add more holding admins."),box);box.append(h("p","mut","Loading…"));
+function unameV(){const w=h("div");w.append(h("p","mut","Holding admins now sign in in two steps: first the shared account email + password (what you used just now), then your own username + your own personal password. Choose them now (username 3-24 letters, numbers, . _ or -; password 10+ characters). After saving you will log in again."),form([["u","Your username"],["a","Your personal password (10+ characters)","password"],["c","Repeat personal password","password"]],"Save",async o=>{const u=o.u.toLowerCase();if(!unameOk(u))throw new Error("Username: 3-24 letters, numbers, . _ or -");if(o.a.length<10||o.a.length>72)throw new Error("Password must be 10-72 characters");if(o.a!==o.c)throw new Error("The two passwords do not match");
+const q=await sb.functions.invoke("holding-admin",{body:{action:"set-username",username:u,password:o.a}});if(q.error)throw new Error(await fnErr(q,"Could not save. Try again."));
+await sb.auth.signOut();me=null;HX=[];MS=[];gateE="";rmsg="Saved. Log in with the shared email and password, then your username "+u+" and your personal password.";paint()}));return w}
+function adminsV(){const w=h("div"),box=h("div");w.append(h("p","mut","Holding admins sign in with the shared email and password first, then their own username and personal password. Only the main admin can add more holding admins."),box);box.append(h("p","mut","Loading…"));
 sb.functions.invoke("holding-admin",{body:{action:"list"}}).then(async r=>{if(r.error){box.replaceChildren(h("p","err",await fnErr(r,"Could not load the admins. Is the holding-admin function deployed?")));return}
 const d=r.data||{},L=h("div");(d.admins||[]).forEach(x=>{const c=h("div","card");c.append(h("b","",x.username||"(no username yet)"),h("p","mut",x.main?"Main admin":"Added by the main admin"));L.append(c)});box.replaceChildren(L);
 if(d.canCreate)box.append(h("h3","sec","Add a holding admin"),form([["u","Username (3-24 letters, numbers, . _ or -)"],["a","Password (10+ characters)","password"],["c","Repeat password","password"]],"Add admin",async o=>{const u=o.u.toLowerCase();if(!unameOk(u))throw new Error("Username: 3-24 letters, numbers, . _ or -");if(o.a.length<10||o.a.length>72)throw new Error("Password must be 10-72 characters");if(o.a!==o.c)throw new Error("The two passwords do not match");
 const q=await sb.functions.invoke("holding-admin",{body:{action:"create",username:u,password:o.a}});if(q.error)throw new Error(await fnErr(q,"Could not add the admin. Try again."));
-flash="Admin "+u+" added. They log in with your email, the username "+u+" and the password you just set.";paint()}))});return w}
+flash="Admin "+u+" added. They log in with the shared email and password, then the username "+u+" and the personal password you just set.";paint()}))});return w}
 let HX=[],MS=[],PR=[],VR=[],AR=[],bellOpen=false,thread="",addKind="product";
 const dl=d=>Math.ceil((Date.parse(d+"T23:59:59")-Date.now())/D),mineRole=()=>me.role==="holding"?"holding":"biz";
 const addDays=(d,n)=>new Date(Date.parse(d+"T00:00:00Z")+n*D).toISOString().slice(0,10),PD=Math.max(1,Math.round(Number(T("planDays","30")))||30);
