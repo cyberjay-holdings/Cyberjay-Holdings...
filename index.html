@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-sYN7Ll+Oax0RL+KIGUIFoRpB/Vs814fZ8zeqVQLMWfU=' https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js; style-src 'sha256-rI9KqV+Rv6poGM0bKOIlNYD0+yHvP2Xx9lzX56mk8FQ=' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https://hzfkjqmhpalmybaqsdql.supabase.co; connect-src https://hzfkjqmhpalmybaqsdql.supabase.co wss://hzfkjqmhpalmybaqsdql.supabase.co; form-action 'none'; base-uri 'none'; object-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-2PANwP3K8nzRnwP2+DvHNZI2ar90nQaJw5xCj1IJm+g=' https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js; style-src 'sha256-TVSSXDjJTew0Qwse1qgqARUtwRCoz4sAK16uD8akYGw=' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https://hzfkjqmhpalmybaqsdql.supabase.co; connect-src https://hzfkjqmhpalmybaqsdql.supabase.co wss://hzfkjqmhpalmybaqsdql.supabase.co; form-action 'none'; base-uri 'none'; object-src 'none'">
 <meta name="referrer" content="no-referrer">
 <meta name="theme-color" content="#0a0a0b">
 <title>CYBERJAY Holdings | Businesses &amp; Marketplace</title>
@@ -82,6 +82,11 @@ table{width:100%;border-collapse:collapse;font-size:.9rem}th,td{text-align:left;
 .foot{border-top:1px solid var(--line);background:var(--bg2);padding:2.2rem 0;text-align:center;color:var(--mut);font-size:.85rem}.foot b{color:var(--tx);letter-spacing:.08em}
 
 :root[data-font="playfair"]{--font:"Playfair Display",Georgia,serif}
+:root[data-font="cinzel"]{--font:"Cinzel",Georgia,serif}
+:root[data-theme="royal"]{--bg:#0a0720;--bg2:#100b30;--card:#171045;--line:#3d3086;--tx:#f4efff;--mut:#b9b0e0;--ac:var(--acD);--on:var(--onD);--acT:color-mix(in srgb,var(--ac) 70%,#fff);--sh:0 18px 50px rgba(20,8,90,.6);--gold:#e0b84a}
+:root[data-theme="royal"] body{background:radial-gradient(900px 520px at 85% -8%,rgba(122,70,255,.28),transparent 60%),radial-gradient(800px 480px at -8% 18%,rgba(224,184,74,.16),transparent 60%),var(--bg);background-attachment:fixed}
+:root[data-theme="royal"] .card{border-color:#4a3ba0;box-shadow:0 0 0 1px rgba(224,184,74,.2),var(--sh)}
+:root[data-theme="royal"] .eyebrow{color:var(--gold)}
 :root[data-font="oswald"]{--font:"Oswald","Arial Narrow",sans-serif}
 :root[data-font="fredoka"]{--font:"Fredoka","Comic Sans MS",sans-serif}
 :root[data-font="mono"]{--font:var(--mono)}
@@ -409,9 +414,9 @@ const contact=(b,m)=>{const d=h("div","soc");d.append(ext(wa(b,m),"Chat with "+b
 const stats=b=>{const pr=b.items.filter(x=>x.kind!=="service"),i=pr.filter(x=>!x.sold),s=pr.filter(x=>x.sold);return{svc:b.items.length-pr.length,i,s,units:i.reduce((a,x)=>a+x.q,0),val:i.reduce((a,x)=>a+x.p*x.q,0),rev:pr.reduce((a,x)=>a+x.rv,0),usold:pr.reduce((a,x)=>a+x.sq,0),avg:s.length?Math.round(s.reduce((a,x)=>a+(x.s-x.t)/D,0)/s.length):0,slow:i.filter(x=>age(x.t)>30).length}};
 
 /* ---------- appearance ---------- */
-const OPT={theme:[["dark","Dark"],["light","Light"]],accent:["orange","blue","green","purple","slate"],font:[["sora","Sora (modern)"],["playfair","Playfair (elegant)"],["oswald","Oswald (bold)"],["fredoka","Fredoka (friendly)"],["mono","Mono (tech)"],["access","Easy to read"]],size:[["s","Small"],["m","Normal"],["l","Large"],["xl","Extra large"]]};
+const OPT={theme:[["dark","Dark"],["light","Light"],["royal","Royal (gold & violet)"]],accent:["orange","blue","green","purple","slate"],font:[["sora","Sora (modern)"],["cinzel","Cinzel (royal)"],["playfair","Playfair (elegant)"],["oswald","Oswald (bold)"],["fredoka","Fredoka (friendly)"],["mono","Mono (tech)"],["access","Easy to read"]],size:[["s","Small"],["m","Normal"],["l","Large"],["xl","Extra large"]]};
 const DEF={theme:"dark",accent:"orange",font:"sora",size:"m"};let PF={};try{PF=JSON.parse(localStorage.getItem("cj-pref"))||{}}catch(e){}
-const FF={playfair:"Playfair+Display:wght@500;700",oswald:"Oswald:wght@400;500;600",fredoka:"Fredoka:wght@400;500;600",access:"Atkinson+Hyperlegible:wght@400;700"},lfd=new Set(),lf=k=>{if(FF[k]&&!lfd.has(k)){lfd.add(k);const l=document.createElement("link");l.rel="stylesheet";l.href="https://fonts.googleapis.com/css2?family="+FF[k]+"&display=swap";document.head.append(l)}};
+const FF={cinzel:"Cinzel:wght@500;700",playfair:"Playfair+Display:wght@500;700",oswald:"Oswald:wght@400;500;600",fredoka:"Fredoka:wght@400;500;600",access:"Atkinson+Hyperlegible:wght@400;700"},lfd=new Set(),lf=k=>{if(FF[k]&&!lfd.has(k)){lfd.add(k);const l=document.createElement("link");l.rel="stylesheet";l.href="https://fonts.googleapis.com/css2?family="+FF[k]+"&display=swap";document.head.append(l)}};
 function applyPf(){lf(PF.font);const r=document.documentElement;for(const g in OPT){if(PF[g])r.dataset[g]=PF[g];else delete r.dataset[g]}
 document.querySelectorAll("#pan [data-g]").forEach(b=>b.setAttribute("aria-pressed",String((PF[b.dataset.g]||DEF[b.dataset.g])===b.dataset.v)));try{localStorage.setItem("cj-pref",JSON.stringify(PF))}catch(e){}}
 (function(){const p=$("#pan"),L={theme:"Theme",accent:"Colour",font:"Font",size:"Text size"};for(const g in OPT){p.append(h("h5","",L[g]));const w=h("div","opt");OPT[g].forEach(o=>{const v=Array.isArray(o)?o[0]:o,b=h("button",g==="accent"?"sw":"seg",g==="accent"?null:o[1]);b.dataset.g=g;b.dataset.v=v;if(g==="accent")b.setAttribute("aria-label",v);w.append(b)});p.append(w)}
