@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-s1VGqjpxaTJdT0ChDvnYI6E7gyoKvaF92kZ7OD6nSmY=' https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js; style-src 'sha256-GdTHnSJ3IBf2u0J+IDa8t/TmLgXnkP1uYRDjUaWtlaY=' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https://hzfkjqmhpalmybaqsdql.supabase.co; connect-src https://hzfkjqmhpalmybaqsdql.supabase.co wss://hzfkjqmhpalmybaqsdql.supabase.co; form-action 'none'; base-uri 'none'; object-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-0GAGd7tFcsI4OLNOfzWsAIFKo2tcxxa4rg+CKPAvABA=' https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js; style-src 'sha256-tqWR2QFkxAst7n+b+CFq72xj10rVpePXYw9Xex/z7E4=' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https://hzfkjqmhpalmybaqsdql.supabase.co; connect-src https://hzfkjqmhpalmybaqsdql.supabase.co wss://hzfkjqmhpalmybaqsdql.supabase.co; form-action 'none'; base-uri 'none'; object-src 'none'">
 <meta name="referrer" content="no-referrer">
 <meta name="theme-color" content="#0a0a0b">
 <title>CYBERJAY Holdings | Businesses &amp; Marketplace</title>
@@ -265,16 +265,21 @@ input[type=search]{width:100%;margin:0 0 1.2rem;padding:.85rem 1.3rem;border-rad
 .adtrack{will-change:transform}.adcard{-webkit-backdrop-filter:none;backdrop-filter:none}
 @media(prefers-reduced-motion:reduce){.cjo::before,.cjo .rg,.cjo .rg2,.cjo .ob,.cjo .lg,.cjo .lg::after,.cjb>*,.co i,.co img,.btn.busy::before,#topbar.on,#app.pg{animation:none}.cjt i{animation:none;width:100%}.cjl.dt::after,#cjl .ct::after{animation:none;content:"..."}}
 .rstbox{border-color:var(--ac);margin:.8rem 0}.rsterr{margin:.8rem 0}
+.vr{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr) auto;gap:.7rem;align-items:center;padding:.4rem 0;font-size:.9rem}.vr .bt{height:8px;border-radius:99px;background:var(--line);overflow:hidden}.vr .bt i{display:block;height:100%;background:var(--ac);border-radius:99px}.vgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1rem;margin-top:1rem}.vchart{display:flex;align-items:flex-end;gap:2px;height:96px;margin-top:.8rem}.vchart i{flex:1;background:var(--ac);border-radius:3px 3px 0 0;min-height:2px;opacity:.85}.vgrid .card small{display:block;margin:-.2rem 0 .3rem}
 </style>
 </head>
 <body>
-<-- ~~~~~~~~~~~~~~ -->
+<!-- ============ EDIT YOUR WORDS HERE ============
+ Change ONLY the text on the right side of each line (inside the quotes). Keep the quotes, commas and { } braces.
+ Menu labels and the footer are plain HTML below, edit them directly. Do NOT edit anything inside the script or style sections lower down.
+ SOCIAL LINKS: paste your Instagram and TikTok page links into socialIg and socialTt (full https:// link). For socialWa paste either your number with country code (2547XXXXXXXX) or a full https://wa.me/... link. Empty ones show as greyed icons.
+ PASSWORD RESET: resetMode "whatsapp" = owners tap Forgot password and contact the admin on WhatsApp (needs holdingWa). Change to "email" once your domain and email sender are ready. -->
 <script type="application/json" id="txt">
 {
  "resetMode": "whatsapp",
  "socialIg": "",
  "socialTt": "",
- "socialWa": "254714066258",
+ "socialWa": "",
  "eyebrow": "CYBERJAY Holdings · Nairobi",
  "line1": "One house.",
  "lead": "Browse what is on sale, build your shopping list, and finish the purchase on WhatsApp with the business owner.",
@@ -329,7 +334,7 @@ input[type=search]{width:100%;margin:0 0 1.2rem;padding:.85rem 1.3rem;border-rad
  "priceStandard": "KES 299 / month",
  "pricePremium": "KES 699 / month",
  "payNote": "Pay the holding admin as agreed (M-Pesa or WhatsApp). When he confirms your payment he activates your plan.",
- "holdingWa": "254714066258",
+ "holdingWa": "",
  "vTitle": "Verified Seller",
  "vText": "This seller's National ID was checked by CYBERJAY Holdings.",
  "uvText": "This seller has not been ID-verified. Take extra care and never pay in advance.",
@@ -582,7 +587,7 @@ const contactCk=o=>{if(!/^\d{10,15}$/.test(o.wa))throw new Error("WhatsApp: digi
 const emailOk=v=>typeof v==="string"&&v.length<=254&&v===v.toLowerCase()&&/^[a-z0-9._%+-]{1,64}@[a-z0-9-]+(\.[a-z0-9-]+)*\.[a-z]{2,}$/.test(v);
 async function db(p){busy(1,"save");try{const r=await p;if(r.error)throw new Error("Not saved: "+String(r.error.message).slice(0,140));return r}finally{busy(-1,"save")}}
 async function whoami(){let r=await sb.from("profiles").select("role,business_id,username").maybeSingle(),hasU=true;if(r.error){hasU=false;r=await sb.from("profiles").select("role,business_id").maybeSingle()}
-if(r.error||!r.data)return null;const b=S.biz.find(x=>x.uid===r.data.business_id),{data:s}=await sb.auth.getSession(),m=!!(s&&s.session&&s.session.user.user_metadata&&s.session.user.user_metadata.must_change),un=String(r.data.username||"").toLowerCase();me={role:r.data.role,biz:b?b.id:null,must:m,uname:un,needUser:hasU&&r.data.role==="holding"&&!un};tab=m?"pw":me.role==="holding"?"biz":"stock";return me}
+if(r.error||!r.data)return null;const b=S.biz.find(x=>x.uid===r.data.business_id),{data:s}=await sb.auth.getSession(),m=!!(s&&s.session&&s.session.user.user_metadata&&s.session.user.user_metadata.must_change),un=String(r.data.username||"").toLowerCase();me={role:r.data.role,biz:b?b.id:null,must:m,uname:un,needUser:hasU&&r.data.role==="holding"&&!un};tab=m?"pw":me.role==="holding"?"biz":"stock";try{localStorage.setItem("cj-skip","1")}catch(e){}return me}
 async function doLogin(e,p,u){p=p||"";
 if(gateE){u=String(u||"").trim().toLowerCase();if(!unameOk(u)||!p)throw new Error("Wrong username or password.");
 busy(1,"login");try{const r=await sb.auth.signInWithPassword({email:authEmail(gateE,u),password:p});if(r.error)throw new Error("Wrong username or password.");
@@ -634,8 +639,8 @@ for(let y=0;y<n-1;y++)for(let x=0;x<n-1;x++){const c=M[y][x];if(c===M[y][x+1]&&c
 let d=0;for(let y=0;y<n;y++)for(let x=0;x<n;x++)if(M[y][x])d++;s+=Math.floor(Math.abs(d*20-n*n*10)/(n*n))*10;return s};
 let best=0,bp=1e9;for(let m=0;m<8;m++){flip(m);fmt(m);const p=pen();if(p<bp){bp=p;best=m}flip(m)}
 flip(best);fmt(best);return{n,get:(x,y)=>M[y][x]}}})();
-const qrUrl=b=>{const c=document.querySelector('link[rel="canonical"]'),base=(c&&c.href)||location.origin+location.pathname;return base.split("#")[0]+"#/b/"+b.id};
-function qrSvg(b){const q=QR(qrUrl(b)),m=520/(q.n+8),esc=t=>String(t).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"})[c]);
+const qrUrl=(b,q)=>{const c=document.querySelector('link[rel="canonical"]'),base=(c&&c.href)||location.origin+location.pathname;return base.split("#")[0].split("?")[0]+(q?"?s=qr":"")+"#/b/"+b.id};
+function qrSvg(b){const q=QR(qrUrl(b,1)),m=520/(q.n+8),esc=t=>String(t).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"})[c]);
 let d="";for(let y=0;y<q.n;y++)for(let x=0;x<q.n;x++)if(q.get(x,y))d+="M"+x+" "+y+"h1v1h-1z";
 const nm=String(b.name||"").trim(),fs=nm.length>34?38:nm.length>22?46:56,mx=Math.floor(620/(fs*0.56)),ws=nm.split(/\s+/),ls=[""];ws.forEach(w=>{const c=ls[ls.length-1];if(c&&(c+" "+w).length>mx)ls.push(w);else ls[ls.length-1]=c?c+" "+w:w});const L=ls.slice(0,3);
 const tx=L.map((l,i)=>'<text x="360" y="'+(206+i*(fs+8))+'" font-size="'+fs+'" font-weight="700" fill="#ffffff" text-anchor="middle">'+esc(l)+"</text>").join(""),y0=Math.max(330,206+(L.length-1)*(fs+8)+60);
@@ -655,14 +660,40 @@ ds.addEventListener("click",()=>sv(new Blob([svg],{type:"image/svg+xml"}),fn+".s
 cl.addEventListener("click",async()=>{try{await navigator.clipboard.writeText(link);cl.textContent="Copied"}catch(e){cl.textContent="Select and copy the link below"}});
 r.append(dp,ds,cl);c.append(h("h4","","Your permanent QR code"),h("p","mut","This card was made automatically when your business was created. Anyone who scans it lands directly on "+b.name+". It never changes, so you can print it, put it on your shop, receipts or social media."),im,r,h("p","mut","Link inside the code: "+link));w.append(c);return w}
 
+const VID=(()=>{try{let v=localStorage.getItem("cj-vid");if(!v||!/^[A-Za-z0-9-]{8,64}$/.test(v)){v=(crypto.randomUUID&&crypto.randomUUID())||(Date.now().toString(36)+Math.random().toString(36).slice(2,12));localStorage.setItem("cj-vid",v)}return v}catch(e){return""}})();
+let trkRef=true,trkLast="";
+function track(k,slug){try{if(!VID||!sb||k==="chamber"||me||navigator.doNotTrack==="1"||localStorage.getItem("cj-skip"))return;const page=["home","about","b","join"].includes(k)?k:"other",key=page+"|"+(slug||"");if(key===trkLast)return;trkLast=key;
+const q=new URLSearchParams(location.search).get("s")||"",src=/^[a-z0-9_-]{1,12}$/.test(q)?q:"";let ref="";if(trkRef){trkRef=false;try{const u=new URL(document.referrer);if(u.host&&u.host!==location.host)ref=u.host.toLowerCase()}catch(e){}}
+const w=innerWidth,dv=w<700?"mobile":w<1100?"tablet":"desktop";Promise.resolve(sb.functions.invoke("track",{body:{vid:VID,page,slug:slug||"",src,ref,dv}})).catch(()=>{})}catch(e){}}
+let visDays=30;
+function visV(){const w=h("div"),box=h("div"),rg=h("div","row");let rn=null;try{rn=new Intl.DisplayNames(["en"],{type:"region"})}catch(e){}
+[7,30,90].forEach(d=>{const x=h("button","btn "+(d===visDays?"p":"g"),"Last "+d+" days");x.addEventListener("click",()=>{visDays=d;paint()});rg.append(x)});
+w.append(h("p","mut","Anonymous visit counts. No names, IP addresses or cookies are stored. The place is an approximate guess from the visitor's network, so towns can be off. Visits from devices where an admin has logged in are not counted."),rg,box);box.append(h("p","mut","Loading…"));
+sb.rpc("visit_stats",{p_days:visDays}).then(r=>{if(r.error||!r.data){box.replaceChildren(h("p","err","Could not load the visitors. Has the visitors SQL been run in Supabase?"));return}
+const d=r.data,fm=n=>Number(n||0).toLocaleString("en-KE"),tl=h("div","row");
+[["Views today",d.today_views],["Visitors today",d.today_visitors],["Views, last "+visDays+" days",d.views],["Unique visitors, last "+visDays+" days",d.visitors]].forEach(([l,v])=>{const c=h("div","card");c.append(h("h3","",fm(v)),h("p","mut",l));tl.append(c)});
+const m={};(d.by_day||[]).forEach(x=>{m[x.day]=x});const days=[];for(let i=visDays-1;i>=0;i--)days.push(new Date(Date.now()-i*864e5).toLocaleDateString("en-CA",{timeZone:"Africa/Nairobi"}));
+const mx=Math.max(1,...days.map(x=>m[x]?m[x].views:0)),ch=h("div","vchart");days.forEach(x=>{const v=m[x]?m[x].views:0,b=h("i");b.style.height=Math.max(2,Math.round(v/mx*100))+"%";b.title=x+": "+v+" views"+(m[x]?", "+m[x].visitors+" visitors":"");ch.append(b)});
+const cc=h("div","card");cc.append(h("h4","","Views per day"),ch);
+const list=(t,rows,lab,sub)=>{const c=h("div","card");c.append(h("h4","",t));if(!rows||!rows.length){c.append(h("p","mut","No visits yet."));return c}const top=Math.max(1,...rows.map(x=>x.views));rows.forEach(x=>{const r=h("div","vr"),l=h("div","",lab(x)),bt=h("div","bt"),i=h("i");i.style.width=Math.max(3,Math.round(x.views/top*100))+"%";bt.append(i);r.append(l,bt,h("b","",fm(x.views)));c.append(r);const s=sub?sub(x):"";if(s)c.append(h("small","mut",s))});return c};
+const cn=x=>x==="??"?"Unknown":(rn?(rn.of(x)||x):x),bz=k=>{const b=S.biz.find(z=>z.id===k);return b?b.name:({home:"Home page",about:"About page",join:"Register page",other:"Other pages"})[k]||k},pn={mobile:"Phone",tablet:"Tablet",desktop:"Computer",unknown:"Unknown",direct:"Direct (typed or bookmarked)",qr:"QR code scan"};
+const g=h("div","vgrid");g.append(
+list("Countries",d.countries,x=>cn(x.country),x=>fm(x.visitors)+" visitors"),
+list("Regions and towns (approximate)",d.regions,x=>[x.city,x.region].filter((v,i,a)=>v&&a.indexOf(v)===i).join(", ")||cn(x.country),x=>cn(x.country)+" · "+fm(x.visitors)+" visitors"),
+list("Pages and businesses",d.pages,x=>bz(x.k),x=>fm(x.visitors)+" visitors"+(x.qr?" · "+fm(x.qr)+" via QR code":"")),
+list("How they arrived",d.sources,x=>pn[x.k]||x.k,x=>fm(x.visitors)+" visitors"),
+list("Devices",d.devices,x=>pn[x.k]||x.k,x=>fm(x.visitors)+" visitors"),
+list("Websites that sent them",d.referrers,x=>x.k,x=>fm(x.visitors)+" visitors"));
+box.replaceChildren(tl,cc,g)});return w}
+
 function room(){const hold=me.role==="holding",b=hold?null:S.biz.find(x=>x.id===me.biz);if(!hold&&!b){me=null;return login()}
 const w=h("div"),bar=h("div","row bar"),lo=h("button","btn g","Log out");lo.addEventListener("click",async()=>{await sb.auth.signOut();me=null;tip="";rst=null;HX=[];MS=[];bellOpen=false;thread="";paint()});bar.append(h("h3","",hold?"Holding admin \u00b7 CYBERJAY":b.name+" \u00b7 Admin"),bell(),lo);
-const pn=S.biz.filter(x=>!x.approved).length,qn=PR.filter(x=>x.status==="requested").length,vn=VR.filter(x=>x.status==="pending").length,an=AR.filter(x=>x.status==="requested").length,T=me.must?[["pw","Set your password"]]:me.needUser?[["uname","Choose your username"]]:(hold?[["apps","Applications"+(pn?" ("+pn+")":"")],["members","Members"],["admins","Admins"],["biz","Businesses"],["plans","Plans"+(qn?" ("+qn+")":"")],["ver","Verification"+(vn?" ("+vn+")":"")],["ads","Ads"+(an?" ("+an+")":"")],["reg","Register business"]]:[["stock","Stock & cash flow"],["add","Add item"],["prof","Profile"],["qr","QR code"],["plan","Plan"],["verify","Verify"],["ads","Ads"]]).concat([["pw","Password"]]);
+const pn=S.biz.filter(x=>!x.approved).length,qn=PR.filter(x=>x.status==="requested").length,vn=VR.filter(x=>x.status==="pending").length,an=AR.filter(x=>x.status==="requested").length,T=me.must?[["pw","Set your password"]]:me.needUser?[["uname","Choose your username"]]:(hold?[["apps","Applications"+(pn?" ("+pn+")":"")],["members","Members"],["admins","Admins"],["biz","Businesses"],["vis","Visitors"],["plans","Plans"+(qn?" ("+qn+")":"")],["ver","Verification"+(vn?" ("+vn+")":"")],["ads","Ads"+(an?" ("+an+")":"")],["reg","Register business"]]:[["stock","Stock & cash flow"],["add","Add item"],["prof","Profile"],["qr","QR code"],["plan","Plan"],["verify","Verify"],["ads","Ads"]]).concat([["pw","Password"]]);
 if(!T.some(x=>x[0]===tab))tab=T[0][0];
 const tb=h("div","sub");T.forEach(([k,l])=>{const x=h("button","btn "+(k===tab?"p":"g"),l);x.addEventListener("click",()=>{tab=k;tip="";rst=null;rerr=null;paint()});tb.append(x)});
 w.append(bar,tb);if(bellOpen)w.append(panel());if(me.must)w.append(h("p","err","Welcome! Please set your own password to continue."));if(flash){const f=h("p","err",flash);f.setAttribute("role","status");w.append(f);flash=""}
 if(tip){const c=h("div","card"),ta=h("textarea");ta.readOnly=true;ta.value=tip;c.append(h("p","mut","Create the owner in Supabase (Authentication > Users > Add user, auto-confirm), then run this in the SQL Editor:"),ta);w.append(c)}
-w.append(({stock:()=>stockV(b),add:()=>addV(b),prof:()=>profV(b),qr:()=>qrV(b),biz:bizV,reg:regV,pw:pwV,apps:appsV,plan:()=>planV(b),verify:()=>verifyV(b),plans:plansV,ver:verV,ads:()=>hold?adsV():adV(b),members:membersV,admins:adminsV,uname:unameV})[tab]());return w}
+w.append(({stock:()=>stockV(b),add:()=>addV(b),prof:()=>profV(b),qr:()=>qrV(b),biz:bizV,reg:regV,pw:pwV,apps:appsV,plan:()=>planV(b),verify:()=>verifyV(b),plans:plansV,ver:verV,ads:()=>hold?adsV():adV(b),members:membersV,vis:visV,admins:adminsV,uname:unameV})[tab]());return w}
 function row(b,x){const r=h("div","svc rw"),im=h("img","th");im.src=safeImg(x.img)||ph(x.n);im.alt="";const m=h("div","gr");m.append(h("b","",x.n),h("small","",x.kind==="service"?"Service \u00b7 "+x.dur+" \u00b7 "+x.gal.length+" portfolio photo"+(x.gal.length===1?"":"s"):x.q+" in stock \u00b7 "+x.sq+" sold \u00b7 "+(x.sold?"sold out "+age(x.s)+" days ago":"listed "+age(x.t)+" days ago")));
 if(x.kind!=="service"&&!x.sold&&age(x.t)>30)m.append(h("span","chip slow","Slow mover"));
 const num=(v,l,t,mx,fn)=>{const i=h("input"),lb=h("label","mini",t);i.type="number";i.min=0;i.step=1;i.value=v;i.setAttribute("aria-label",l);i.addEventListener("change",async()=>{try{const n=Math.round(Number(i.value));if(!(n>=0&&n<=mx))throw new Error("Invalid number");await fn(n)}catch(e){flash=e.message}await refresh();paint()});lb.append(i);return lb};
@@ -900,7 +931,7 @@ if(k==="b"){const b=S.biz.find(x=>x.id===hs[1]);if(b){v=biz(b);n="b";document.ti
 else if(k==="about"){v=about();n="about"}else if(k==="chamber"){v=chamber();n="chamber"}else if(k==="join"){v=join();n="join"}else if(k==="terms"){v=terms();n="terms"}
 if(!v){v=home();n="home"}if(n==="home")document.title="CYBERJAY Holdings | Businesses & Marketplace";
 app.replaceChildren(v)}catch(err){console.error(err);const m=h("div","card");m.append(h("h3","","This page could not load"),h("p","mut","Please refresh the page. If it keeps happening, send this message to support: "+String(err&&err.message||err).slice(0,160)));app.replaceChildren(m);hideBoot();return}
-if(!keep){app.classList.remove("pg");void app.offsetWidth;app.classList.add("pg");CJL.nav()}document.querySelectorAll("#menu a").forEach(a=>a.classList.toggle("on",a.dataset.r===n));
+if(!keep){app.classList.remove("pg");void app.offsetWidth;app.classList.add("pg");CJL.nav()}document.querySelectorAll("#menu a").forEach(a=>a.classList.toggle("on",a.dataset.r===n));track(n,n==="b"?hs[1]:"");
 if(keep)scrollTo({top:y,behavior:"instant"});else{scrollTo({top:0,behavior:"instant"});$("#pan").hidden=true}hideBoot()}
 document.addEventListener("click",e=>{const t=e.target.closest("[data-scroll]");if(t){const el=document.getElementById(t.dataset.scroll);if(el)el.scrollIntoView({behavior:"smooth"})}});
 $("#yr").textContent=new Date().getFullYear();$(".foot .wrap").prepend(soc2());
