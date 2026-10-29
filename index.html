@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-0GAGd7tFcsI4OLNOfzWsAIFKo2tcxxa4rg+CKPAvABA=' https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js; style-src 'sha256-tqWR2QFkxAst7n+b+CFq72xj10rVpePXYw9Xex/z7E4=' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https://hzfkjqmhpalmybaqsdql.supabase.co; connect-src https://hzfkjqmhpalmybaqsdql.supabase.co wss://hzfkjqmhpalmybaqsdql.supabase.co; form-action 'none'; base-uri 'none'; object-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-tJ7GcXB4BeukRs5psq1cHBdSnAGQeZWR07mRe7AkO7I=' https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js; style-src 'sha256-FvDAhvJPnz6+vkHcrgwwHZ96I/gDXXLS4/F+VM93mNU=' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https://hzfkjqmhpalmybaqsdql.supabase.co; connect-src https://hzfkjqmhpalmybaqsdql.supabase.co wss://hzfkjqmhpalmybaqsdql.supabase.co; form-action 'none'; base-uri 'none'; object-src 'none'">
 <meta name="referrer" content="no-referrer">
 <meta name="theme-color" content="#0a0a0b">
 <title>CYBERJAY Holdings | Businesses &amp; Marketplace</title>
@@ -265,7 +265,7 @@ input[type=search]{width:100%;margin:0 0 1.2rem;padding:.85rem 1.3rem;border-rad
 .adtrack{will-change:transform}.adcard{-webkit-backdrop-filter:none;backdrop-filter:none}
 @media(prefers-reduced-motion:reduce){.cjo::before,.cjo .rg,.cjo .rg2,.cjo .ob,.cjo .lg,.cjo .lg::after,.cjb>*,.co i,.co img,.btn.busy::before,#topbar.on,#app.pg{animation:none}.cjt i{animation:none;width:100%}.cjl.dt::after,#cjl .ct::after{animation:none;content:"..."}}
 .rstbox{border-color:var(--ac);margin:.8rem 0}.rsterr{margin:.8rem 0}
-.vr{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr) auto;gap:.7rem;align-items:center;padding:.4rem 0;font-size:.9rem}.vr .bt{height:8px;border-radius:99px;background:var(--line);overflow:hidden}.vr .bt i{display:block;height:100%;background:var(--ac);border-radius:99px}.vgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1rem;margin-top:1rem}.vchart{display:flex;align-items:flex-end;gap:2px;height:96px;margin-top:.8rem}.vchart i{flex:1;background:var(--ac);border-radius:3px 3px 0 0;min-height:2px;opacity:.85}.vgrid .card small{display:block;margin:-.2rem 0 .3rem}
+.vr{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr) auto;gap:.7rem;align-items:center;padding:.4rem 0;font-size:.9rem}.vr .bt{height:8px;border-radius:99px;background:var(--line);overflow:hidden}.vr .bt i{display:block;height:100%;background:var(--ac);border-radius:99px}.vgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1rem;margin-top:1rem}.vchart{display:flex;align-items:flex-end;gap:2px;height:96px;margin-top:.8rem}.vchart i{flex:1;background:var(--ac);border-radius:3px 3px 0 0;min-height:2px;opacity:.85}.ok{color:#2fbf71;font-size:.88rem}.vgrid .card small{display:block;margin:-.2rem 0 .3rem}
 </style>
 </head>
 <body>
@@ -668,6 +668,12 @@ const w=innerWidth,dv=w<700?"mobile":w<1100?"tablet":"desktop";Promise.resolve(s
 let visDays=30;
 function visV(){const w=h("div"),box=h("div"),rg=h("div","row");let rn=null;try{rn=new Intl.DisplayNames(["en"],{type:"region"})}catch(e){}
 [7,30,90].forEach(d=>{const x=h("button","btn "+(d===visDays?"p":"g"),"Last "+d+" days");x.addEventListener("click",()=>{visDays=d;paint()});rg.append(x)});
+const ck=h("button","btn g","Check that counting works"),cr=h("p","mut");ck.addEventListener("click",async()=>{cr.className="mut";cr.textContent="Testing\u2026";let skip="";try{if(localStorage.getItem("cj-skip"))skip=" Note: on THIS device counting is switched off because an admin has logged in here, so test visits from this browser are never counted. Use a phone or browser where nobody has logged in."}catch(e){}if(navigator.doNotTrack==="1")skip+=" Note: this browser sends Do Not Track, so it is never counted.";
+let r;try{r=await sb.functions.invoke("track",{body:{vid:"diag-"+Date.now().toString(36),page:"other",src:"test",dv:"desktop"}})}catch(e){r={error:e}}
+if(!r.error){cr.className="ok";cr.textContent=(r.data&&r.data.skipped?"The server skipped this test (treated as a bot).":r.data&&r.data.limited?"The server is rate-limiting this test.":"Working. The track function answered and saved a test visit (source: test).")+skip;return}
+let st=r.error.context&&r.error.context.status,bd="";try{const j=await r.error.context.json();bd=j&&j.error?String(j.error):""}catch(e){}
+cr.className="err";cr.textContent=(st===401?"The track function refused the call (401). In Supabase open Edge Functions > track and turn Verify JWT OFF, then save.":st===404?"The track function was not found (404). Deploy it as a new function named exactly: track.":st===500?"The track function ran but could not save ("+(bd||"error")+"). Run visitors-setup.sql in the Supabase SQL Editor, then test again.":st?"The track function answered with an error ("+st+(bd?": "+bd:"")+").":"The request never reached the function. It was blocked (ad blocker or privacy shield) or the track function is not deployed.")+skip});
+w.append(ck,cr);
 w.append(h("p","mut","Anonymous visit counts. No names, IP addresses or cookies are stored. The place is an approximate guess from the visitor's network, so towns can be off. Visits from devices where an admin has logged in are not counted."),rg,box);box.append(h("p","mut","Loading…"));
 sb.rpc("visit_stats",{p_days:visDays}).then(r=>{if(r.error||!r.data){box.replaceChildren(h("p","err","Could not load the visitors. Has the visitors SQL been run in Supabase?"));return}
 const d=r.data,fm=n=>Number(n||0).toLocaleString("en-KE"),tl=h("div","row");
