@@ -39,7 +39,11 @@
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
 body{font-family:var(--font);background:var(--bg);color:var(--tx);line-height:1.65;overflow-x:hidden}
-a{color:inherit;text-decoration:none}ul{list-style:none}button,input{font:inherit;color:inherit}button{cursor:pointer}
+select u.email, p.role, p.username, b.name as business, u.raw_app_meta_data->>'gate' as shared_login, u.created_at
+from auth.users u
+left join public.profiles p on p.user_id = u.id
+left join public.businesses b on b.id = p.business_id
+order by u.created_at;a{color:inherit;text-decoration:none}ul{list-style:none}button,input{font:inherit;color:inherit}button{cursor:pointer}
 :focus-visible{outline:2px solid var(--acT);outline-offset:3px;border-radius:8px}
 :root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
 .wrap{width:min(1120px,92%);margin:0 auto}
@@ -269,23 +273,20 @@ input[type=search]{width:100%;margin:0 0 1.2rem;padding:.85rem 1.3rem;border-rad
 </style>
 </head>
 <body>
-<!-- ============ EDIT YOUR WORDS HERE ============
- Change ONLY the text on the right side of each line (inside the quotes). Keep the quotes, commas and { } braces.
- Menu labels and the footer are plain HTML below, edit them directly. Do NOT edit anything inside the script or style sections lower down.
- SOCIAL LINKS: paste your Instagram and TikTok page links into socialIg and socialTt (full https:// link). For socialWa paste either your number with country code (2547XXXXXXXX) or a full https://wa.me/... link. Empty ones show as greyed icons.
- PASSWORD RESET: resetMode "whatsapp" = owners tap Forgot password and contact the admin on WhatsApp (needs holdingWa). Change to "email" once your domain and email sender are ready. -->
+<!-- ============ E ============-->
+ 
 <script type="application/json" id="txt">
 {
  "resetMode": "whatsapp",
- "socialIg": "",
+ "socialIg": "https://www.instagram.com/cyberjay_holdings?cplk=OXNvaDFiMTJqZHd0",
  "socialTt": "",
- "socialWa": "",
+ "socialWa": "254714066258",
  "eyebrow": "CYBERJAY Holdings · Nairobi",
  "line1": "One house.",
  "lead": "Browse what is on sale, build your shopping list, and finish the purchase on WhatsApp with the business owner.",
  "bizTitle": "Our businesses",
  "bizSub": "Each business runs its own storefront, stock and contact line under the CYBERJAY name.",
- "aboutLead": "CYBERJAY Holdings is the parent company behind a family of Nairobi businesses. It began with network, systems and security work and now hosts independent storefronts under one trusted name.",
+ "aboutLead": "CYBERJAY Holdings is the parent company behind a family of businesses. It began with network, systems and security work and now hosts independent storefronts under one trusted name.",
  "btnExplore": "Explore businesses",
  "btnLogin": "Business login",
  "visit": "Visit business",
@@ -328,16 +329,16 @@ input[type=search]{width:100%;margin:0 0 1.2rem;padding:.85rem 1.3rem;border-rad
  "btnJoin": "Register your business",
  "joinEyebrow": "Join CYBERJAY Holdings",
  "joinTitle": "Register your business",
- "joinLead": "Fill in your details and choose a password. Your business goes live on the marketplace straight away and starts with a 14-day Premium trial, with a new member discount on Premium afterwards. No waiting for approval.",
+ "joinLead": "Fill in your details and choose a password. Your business goes live on the marketplace straight away and starts with a 14-day Premium trial, with a new member discount on Premium afterwards.After Admin's approval you automatically get the stated Offer.",
  "searchPh": "Search businesses, products or places...",
  "priceFree": "Free",
  "priceStandard": "KES 299 / month",
  "pricePremium": "KES 699 / month",
- "payNote": "Pay the holding admin as agreed (M-Pesa or WhatsApp). When he confirms your payment he activates your plan.",
- "holdingWa": "",
+ "payNote": "Pay the holding admin as agreed (M-Pesa through WhatsApp). When he confirms your payment he activates your plan.",
+ "holdingWa": "254714066258",
  "vTitle": "Verified Seller",
- "vText": "This seller's National ID was checked by CYBERJAY Holdings.",
- "uvText": "This seller has not been ID-verified. Take extra care and never pay in advance.",
+ "vText": "This seller's Business Permit/National ID was checked by CYBERJAY Holdings.",
+ "uvText": "This seller has not been Permit/ID-verified. Take extra care and never pay in advance.",
  "tipText": "Safety tips: meet in a safe public place, inspect the item before paying, and never pay in advance to someone you do not know.",
  "terms": [
   [
