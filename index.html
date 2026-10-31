@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-tXxNnD1RsEAWSXLj0ig1Qsi/R4GWC2MLWQJCAhMbmP0=' https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js; style-src 'sha256-FvDAhvJPnz6+vkHcrgwwHZ96I/gDXXLS4/F+VM93mNU=' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https://hzfkjqmhpalmybaqsdql.supabase.co; connect-src https://hzfkjqmhpalmybaqsdql.supabase.co wss://hzfkjqmhpalmybaqsdql.supabase.co; form-action 'none'; base-uri 'none'; object-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-yJ/kQZStYqtA1zgrty/Zv9/yUr5rgnvm94CplEXQcgQ=' https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js; style-src 'sha256-FvDAhvJPnz6+vkHcrgwwHZ96I/gDXXLS4/F+VM93mNU=' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https://hzfkjqmhpalmybaqsdql.supabase.co; connect-src https://hzfkjqmhpalmybaqsdql.supabase.co wss://hzfkjqmhpalmybaqsdql.supabase.co; form-action 'none'; base-uri 'none'; object-src 'none'">
 <meta name="referrer" content="no-referrer">
 <meta name="theme-color" content="#0a0a0b">
 <title>CYBERJAY Holdings | Businesses &amp; Marketplace</title>
@@ -366,7 +366,7 @@ input[type=search]{width:100%;margin:0 0 1.2rem;padding:.85rem 1.3rem;border-rad
   ],
   [
    "Verified Seller badge",
-   "The badge only means an ID document was reviewed. It is not a guarantee of any seller, product or transaction."
+   "The badge only means an ID document and a business licence or permit were reviewed. It is not a guarantee of any seller, product or transaction."
   ],
   [
    "Removal",
@@ -378,7 +378,7 @@ input[type=search]{width:100%;margin:0 0 1.2rem;padding:.85rem 1.3rem;border-rad
   ],
   [
    "Privacy",
-   "Our Privacy Policy explains what we collect and why. In short: we collect the business details users provide, ID photos only to verify sellers (deleted after review), and anonymous visit statistics. Please read the Privacy Policy, which forms part of these terms."
+   "Our Privacy Policy explains what we collect and why. In short: we collect the business details users provide, ID and business permit photos only to verify sellers (deleted after review), and anonymous visit statistics. Please read the Privacy Policy, which forms part of these terms."
   ],
   [
    "Accounts and security",
@@ -414,7 +414,7 @@ input[type=search]{width:100%;margin:0 0 1.2rem;padding:.85rem 1.3rem;border-rad
   ],
   [
    "What we collect",
-   "Business owners: the business name, category, description, your name, email, WhatsApp number, Instagram handle, location, opening hours, the items and photos you add, and messages you send to the admin. Your password is kept by our login provider in scrambled (hashed) form and we cannot read it. Sellers who ask for the Verified Seller badge: photos of the front and back of a National ID. Visitors: anonymous visit statistics (see section 6)."
+   "Business owners: the business name, category, description, your name, email, WhatsApp number, Instagram handle, location, opening hours, the items and photos you add, and messages you send to the admin. Your password is kept by our login provider in scrambled (hashed) form and we cannot read it. Sellers who ask for the Verified Seller badge: photos of the front and back of a National ID and a photo of the business licence or permit. Visitors: anonymous visit statistics (see section 6)."
   ],
   [
    "What is public",
@@ -422,11 +422,11 @@ input[type=search]{width:100%;margin:0 0 1.2rem;padding:.85rem 1.3rem;border-rad
   ],
   [
    "Why we use it",
-   "To run the marketplace, host your business page, verify sellers, contact you about your account and plan, keep the site safe, and understand how the site is used. We use ID photos only with your consent, to check that you are who you say you are."
+   "To run the marketplace, host your business page, verify sellers, contact you about your account and plan, keep the site safe, and understand how the site is used. We use ID and business permit photos only with your consent, to check that you are who you say you are and that the business is genuine."
   ],
   [
-   "ID photos",
-   "ID photos are private. Only the CYBERJAY admin can open them, only to review your request, and they are deleted from our storage once the review is finished, whether approved or rejected."
+   "ID and permit photos",
+   "ID and business licence or permit photos are private. Only the CYBERJAY admin can open them, only to review your request, and they are deleted from our storage once the review is finished, whether approved or rejected."
   ],
   [
    "Visit statistics",
@@ -442,7 +442,7 @@ input[type=search]{width:100%;margin:0 0 1.2rem;padding:.85rem 1.3rem;border-rad
   ],
   [
    "How long we keep it",
-   "Business details and messages are kept while your account exists and are deleted when your business is removed. ID photos are deleted after review. Visit statistics are kept for up to 14 months."
+   "Business details and messages are kept while your account exists and are deleted when your business is removed. ID and business permit photos are deleted after review. Visit statistics are kept for up to 14 months."
   ],
   [
    "Browser storage",
@@ -905,14 +905,14 @@ const hw=T("holdingWa","");if(pend&&/^\d{10,15}$/.test(hw))w.append(ext("https:/
 function verifyV(b){const w=h("div"),v=VR.find(x=>x.business_id===b.uid);
 if(b.verified)return h("p","lead","You are a Verified Seller \u2713");
 if(b.plan==="free"){w.append(h("p","mut","The Verified Seller badge is available on the Standard and Premium plans. Upgrade in the Plan tab first."));return w}
-if(v&&v.status==="pending"){w.append(h("p","lead","Your ID is being reviewed by the holding admin. The badge appears once it is approved."));return w}
-if(v&&v.status==="rejected")w.append(h("p","err","Your last submission was not approved. Make sure the photos are clear and the name matches "+b.ceo+", then try again."));
-w.append(h("p","mut","Upload clear photos of the FRONT and BACK of your National ID. The name must match the owner name on your profile ("+b.ceo+"). Only the holding admin can see them, and they are deleted after the review."));
-w.append(form([["f","ID front","file"],["k","ID back","file"],["ok","Do you agree to this?","select","no",[["no","No"],["yes","Yes, I agree"]]]],"Submit for verification",async o=>{
-if(o.ok!=="yes")throw new Error("Choose Yes, I agree to continue");if(!o.f||!o.k)throw new Error("Choose both the front and the back photo");
-const id=crypto.randomUUID(),pf=b.uid+"/front-"+id+".jpg",pk=b.uid+"/back-"+id+".jpg";
-await db(sb.storage.from("id-docs").upload(pf,await rz(o.f,1600),{contentType:"image/jpeg"}));await db(sb.storage.from("id-docs").upload(pk,await rz(o.k,1600),{contentType:"image/jpeg"}));
-await db(sb.from("verifications").upsert({business_id:b.uid,status:"pending",front:pf,back:pk,submitted_at:new Date().toISOString(),decided_at:null,note:""}));await loadX();flash="Submitted. The holding admin will review your ID.";paint()}));return w}
+if(v&&v.status==="pending"){w.append(h("p","lead","Your ID and business permit are being reviewed by the holding admin. The badge appears once they are approved."));return w}
+if(v&&v.status==="rejected")w.append(h("p","err","Your last submission was not approved. Make sure the photos are clear, the ID name matches "+b.ceo+" and the permit is valid, then try again."));
+w.append(h("p","mut","Upload three clear photos: the FRONT and BACK of your National ID, and your business licence or permit. The name on the ID must match the owner name on your profile ("+b.ceo+"), and the permit must be for "+b.name+" and still valid. Only the holding admin can see them, and they are deleted automatically as soon as the review is finished."));
+w.append(form([["f","ID front","file"],["k","ID back","file"],["pm","Business licence or permit","file"],["ok","Do you agree to this?","select","no",[["no","No"],["yes","Yes, I agree"]]]],"Submit for verification",async o=>{
+if(o.ok!=="yes")throw new Error("Choose Yes, I agree to continue");if(!o.f||!o.k||!o.pm)throw new Error("Choose all three photos: ID front, ID back and your business licence or permit");
+const id=crypto.randomUUID(),pf=b.uid+"/front-"+id+".jpg",pk=b.uid+"/back-"+id+".jpg",pp=b.uid+"/permit-"+id+".jpg";
+await db(sb.storage.from("id-docs").upload(pf,await rz(o.f,1600),{contentType:"image/jpeg"}));await db(sb.storage.from("id-docs").upload(pk,await rz(o.k,1600),{contentType:"image/jpeg"}));await db(sb.storage.from("id-docs").upload(pp,await rz(o.pm,1600),{contentType:"image/jpeg"}));
+await db(sb.from("verifications").upsert({business_id:b.uid,status:"pending",front:pf,back:pk,permit:pp,submitted_at:new Date().toISOString(),decided_at:null,note:""}));await loadX();flash="Submitted. The holding admin will review your ID and business permit.";paint()}));return w}
 function plansV(){const w=h("div"),L=PR.filter(x=>x.status==="requested");w.append(h("h3","sec","Plan requests"));if(!L.length)w.append(h("p","mut","No plan requests waiting."));
 L.forEach(q=>{const b=S.biz.find(x=>x.uid===q.business_id);if(!b||!PL[q.plan])return;const of=offerInfo(b),use=q.plan==="premium"&&of.state==="active",full=q.plan==="premium"?CFG.pPrice:CFG.sPrice,c=h("div","card rowc"),r=h("div","row"),no=h("button","btn g","Decline");
 c.append(h("h4","",b.name),h("p","mut","Requested "+PL[q.plan].n+" (now "+PL[b.plan].n+"). Normal price KES "+full+(use?"; "+of.kind+" offer "+of.pct+"% off = KES "+of.price+" (valid until "+of.end+")":"")+". Confirm what they paid, then agree."));
@@ -928,13 +928,27 @@ w.append(form([["pl","Plan for "+b.name,"select",b.planRaw,[["free","Free"],["st
 if(!["free","standard","premium"].includes(o.pl))throw new Error("Invalid plan");const n=Math.round(Number(o.dy));if(!(n>=0&&n<=3650))throw new Error("Days must be 0 to 3650");
 const until=o.pl==="free"||n===0?null:addDays(b.until&&!(b.until<today())?b.until:addDays(today(),-1),n);
 await db(sb.from("businesses").update({plan:o.pl,plan_until:until,trial:false}).eq("id",b.uid));await refresh();flash=b.name+" is now on the "+PL[o.pl].n+" plan"+(until?" until "+until:"")+".";paint()}))});return w}
-function verV(){const w=h("div"),L=VR.filter(x=>x.status==="pending");if(!L.length)w.append(h("p","mut","No ID verifications waiting."));
-L.forEach(v=>{const b=S.biz.find(x=>x.uid===v.business_id);if(!b)return;const c=h("div","card rowc"),r=h("div","row"),box=h("div"),ap=h("button","btn p","Approve (ID matches)"),rj=h("button","btn g","Reject");
-c.append(h("h4","",b.name),h("p","mut","Registered owner name: "+b.ceo+". Approve only if the ID shows the same name and the photos look genuine."));
+let swept=false;
+async function sweepIds(){const keep=new Set(VR.filter(x=>x.status==="pending").flatMap(x=>[x.front,x.back,x.permit]).filter(Boolean));let gone=0,fail=0;
+for(const b of S.biz){const l=await sb.storage.from("id-docs").list(b.uid,{limit:100});if(l.error){fail++;continue}
+const dead=(l.data||[]).filter(f=>f&&f.id&&f.name&&Date.now()-Date.parse(f.created_at||f.updated_at||0)>6e5).map(f=>b.uid+"/"+f.name).filter(p=>!keep.has(p));
+if(dead.length){const r=await sb.storage.from("id-docs").remove(dead);if(r.error)fail++;else gone+=dead.length}}return{gone,fail}}
+function verV(){const w=h("div"),L=VR.filter(x=>x.status==="pending");
+w.append(h("p","mut","Each seller uploads their National ID (front and back) and their business licence or permit. Check them, then approve or reject. The photos are deleted automatically as soon as you decide."));
+const sw=h("div","row"),swb=h("button","btn g","Delete any leftover ID and permit photos"),sm=h("p","mut");swb.type="button";
+const runSweep=async quiet=>{swb.disabled=true;try{const r=await sweepIds();if(r.fail)sm.textContent="Cleanup finished with "+r.fail+" problem(s). Try again."+(r.gone?" Deleted "+r.gone+" leftover photo(s).":"");else if(r.gone||!quiet)sm.textContent=r.gone?"Deleted "+r.gone+" leftover photo(s).":"No leftover photos. Everything is clean."}catch(e){sm.textContent="Cleanup could not run."}swb.disabled=false};
+swb.addEventListener("click",()=>runSweep(false));sw.append(swb);if(!swept){swept=true;setTimeout(()=>runSweep(true),0)}w.append(sw,sm);
+if(!L.length)w.append(h("p","mut","No verifications waiting."));
+L.forEach(v=>{const b=S.biz.find(x=>x.uid===v.business_id);if(!b)return;const c=h("div","card rowc"),r=h("div","row"),box=h("div"),ap=h("button","btn p","Approve (documents match)"),rj=h("button","btn g","Reject");
+c.append(h("h4","",b.name),h("p","mut","Registered owner: "+b.ceo+" \u00b7 Business name: "+b.name+"."),h("p","mut","Approve only if: (1) the ID shows the same owner name, (2) the licence or permit is for this business and is valid and not expired, and (3) all photos look genuine and unedited."));
+if(!v.permit)c.append(h("p","err","No business licence or permit was uploaded with this request."));
 const show=(label,path)=>{const x=h("button","btn g",label);x.addEventListener("click",async()=>{const q=await sb.storage.from("id-docs").createSignedUrl(path,120);if(q.error||!q.data||!String(q.data.signedUrl).startsWith(SB_URL+"/storage/v1/")){flash="Could not open the photo.";paint();return}const im=h("img","idimg");im.src=q.data.signedUrl;im.alt=label;box.replaceChildren(im)});return x};
-const done=async ok=>{try{await sb.storage.from("id-docs").remove([v.front,v.back]);await db(sb.from("verifications").update({status:ok?"approved":"rejected",front:"",back:"",decided_at:new Date().toISOString()}).eq("business_id",v.business_id));await db(sb.from("businesses").update({verified:ok}).eq("id",b.uid));await Promise.all([refresh(),loadX()]);flash=b.name+(ok?" is now a Verified Seller. The ID photos were deleted.":" was not verified. The ID photos were deleted.")}catch(e){flash=e.message}paint()};
+const done=async ok=>{if(ok&&!v.permit&&!confirm("No business permit was uploaded. Approve anyway?"))return;ap.disabled=true;rj.disabled=true;try{const paths=[v.front,v.back,v.permit].filter(Boolean);
+if(paths.length){const rm=await sb.storage.from("id-docs").remove(paths);if(rm.error)throw new Error("Could not delete the photos, so nothing was changed. Try again.")}
+await db(sb.from("verifications").update({status:ok?"approved":"rejected",front:"",back:"",..."permit" in v?{permit:""}:{},decided_at:new Date().toISOString()}).eq("business_id",v.business_id));
+await db(sb.from("businesses").update({verified:ok}).eq("id",b.uid));await Promise.all([refresh(),loadX()]);flash=b.name+(ok?" is now a Verified Seller. ":" was not verified. ")+"The ID and permit photos were deleted."}catch(e){flash=e.message}paint()};
 ap.addEventListener("click",()=>done(true));rj.addEventListener("click",()=>done(false));
-r.append(show("View ID front",v.front),show("View ID back",v.back),ap,rj);c.append(r,box);w.append(c)});return w}
+r.append(show("View ID front",v.front),show("View ID back",v.back),...(v.permit?[show("View business permit",v.permit)]:[]),ap,rj);c.append(r,box);w.append(c)});return w}
 function adV(b){const w=h("div"),on=adOn(b),pend=AR.find(x=>x.business_id===b.uid&&x.status==="requested");
 w.append(h("p","lead",on?"Your sponsored ad is live until "+b.adUntil+" ("+adLeft(b)+" day"+(adLeft(b)===1?"":"s")+" left).":"You have no active sponsored ad."));
 w.append(h("p","mut","A sponsored ad slides across the top of the home page in a glass strip and links to your business page. Prices: "+T("adWeek","KES 200 / week")+" or "+T("adMonth","KES 600 / month")+". "+T("payNote","Pay the holding admin, who will then activate it.")));
